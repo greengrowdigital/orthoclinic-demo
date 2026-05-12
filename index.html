@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>OrthoClinic Panamá — Ortodoncia y odontología premium · 3 sucursales</title>
+  <meta name="description" content="Especialistas en ortodoncia, brackets, blanqueamiento y láser dental en Panamá. Sucursales en Los Andes Mall, Coronado y Costa Verde. Promoción sin abono inicial." />
+  <meta name="theme-color" content="#0E7F8C" />
+  <meta property="og:title" content="OrthoClinic — Ortodoncia premium en Panamá" />
+  <meta property="og:description" content="Sonrisas que cambian vidas. Brackets, ortodoncia invisible, blanqueamiento y láser. 3 sucursales en Panamá." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/public/logo-mark.svg" type="image/svg+xml" />
+  <link href="/shared/theme.css?v=1" rel="stylesheet" />
+  <style>
+    /* === HERO === */
+    .hero {
+      position: relative;
+      padding: calc(var(--oc-nav-h) + 60px) 24px 100px;
+      overflow: hidden;
+      background:
+        radial-gradient(60% 50% at 80% 10%, var(--oc-teal-tint) 0%, transparent 60%),
+        radial-gradient(40% 40% at 5% 90%, var(--oc-coral-tint) 0%, transparent 60%),
+        var(--oc-bg);
+    }
+    .hero-inner {
+      max-width: var(--oc-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+    }
+    .hero-h1 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(46px, 7.2vw, 108px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin: 26px 0 24px;
+      color: var(--oc-ink);
+    }
+    .hero-h1 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .hero-sub {
+      font-size: clamp(16px, 1.35vw, 19px);
+      color: var(--oc-ink-mute);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-trust {
+      display: flex;
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--oc-line);
+      flex-wrap: wrap;
+    }
+    .hero-trust-item .num {
+      font-family: var(--oc-font-display);
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--oc-ink);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .hero-trust-item .num em { color: var(--oc-teal); font-style: italic; }
+    .hero-trust-item .lbl {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--oc-ink-soft);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* Hero visual — collage de cards */
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      max-width: 540px;
+      margin-left: auto;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--oc-radius-xl);
+      overflow: hidden;
+      background:
+        linear-gradient(160deg, var(--oc-teal-soft) 0%, var(--oc-bg-warm) 40%, var(--oc-coral-tint) 100%);
+      box-shadow: var(--oc-shadow-lg);
+    }
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,0.45) 0%, transparent 70%);
+      mix-blend-mode: overlay;
+    }
+    /* "Smile" SVG */
+    .hero-smile {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .hero-smile svg { width: 78%; height: auto; opacity: 0.92; }
+
+    .hero-card-rating {
+      position: absolute;
+      bottom: 8%;
+      left: -10%;
+      background: var(--oc-surface);
+      padding: 18px 22px;
+      border-radius: var(--oc-radius-md);
+      box-shadow: var(--oc-shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 3;
+      animation: float 6s var(--oc-ease) infinite alternate;
+    }
+    .hero-card-rating .stars { color: #F5B544; display: flex; gap: 2px; font-size: 14px; }
+    .hero-card-rating .num { font-family: var(--oc-font-display); font-size: 28px; line-height: 1; color: var(--oc-ink); letter-spacing: -0.02em; }
+    .hero-card-rating .lbl { font-size: 11px; color: var(--oc-ink-soft); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+    .hero-card-locs {
+      position: absolute;
+      top: 6%;
+      right: -12%;
+      background: var(--oc-ink);
+      color: #fff;
+      padding: 22px 24px;
+      border-radius: var(--oc-radius-md);
+      box-shadow: var(--oc-shadow-lg);
+      z-index: 3;
+      max-width: 220px;
+      animation: float 7s var(--oc-ease) 1s infinite alternate-reverse;
+    }
+    .hero-card-locs h5 { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--oc-mint); margin: 0 0 12px; font-weight: 600; }
+    .hero-card-locs p { margin: 0; font-family: var(--oc-font-display); font-size: 22px; line-height: 1.1; letter-spacing: -0.02em; }
+    .hero-card-locs em { color: var(--oc-teal-bright); font-style: italic; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-14px); }
+    }
+
+    /* === MARQUEE BAND === */
+    /* uses .oc-marquee from theme */
+
+    /* === PROBLEM/SOLUTION === */
+    .promise {
+      background: var(--oc-ink);
+      color: #fff;
+      padding: clamp(80px, 10vw, 140px) 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .promise::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(14,160,174,0.30) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .promise-inner { max-width: var(--oc-max); margin: 0 auto; position: relative; }
+    .promise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .promise h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5vw, 76px);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin: 24px 0 0;
+    }
+    .promise h2 em { color: var(--oc-teal-bright); font-style: italic; font-weight: 300; }
+    .promise-list { display: flex; flex-direction: column; gap: 32px; }
+    .promise-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .promise-item:last-child { border-bottom: none; }
+    .promise-num {
+      font-family: var(--oc-font-display);
+      font-size: 38px;
+      color: var(--oc-teal-bright);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1;
+      min-width: 54px;
+    }
+    .promise-item h3 { font-family: var(--oc-font-display); font-size: 26px; font-weight: 400; letter-spacing: -0.01em; margin: 0 0 10px; color: #fff; }
+    .promise-item p { color: rgba(255,255,255,0.70); font-size: 15px; line-height: 1.65; margin: 0; }
+
+    /* === SERVICES === */
+    .services-head {
+      max-width: 760px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .services-head h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5.5vw, 76px);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      margin: 24px 0 16px;
+    }
+    .services-head h2 em { color: var(--oc-teal); font-style: italic; }
+    .services-head p { color: var(--oc-ink-mute); font-size: 17px; max-width: 580px; margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .service-card {
+      position: relative;
+      padding: 40px 32px 36px;
+      background: var(--oc-surface);
+      border: 1px solid var(--oc-line);
+      border-radius: var(--oc-radius-lg);
+      overflow: hidden;
+      transition: transform .5s var(--oc-ease), box-shadow .5s, border-color .35s;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--oc-shadow-md);
+      border-color: var(--oc-line-teal);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--oc-teal), var(--oc-teal-bright), var(--oc-mint));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .6s var(--oc-ease);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--oc-radius-md);
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: transform .5s var(--oc-ease-spring), background .35s;
+    }
+    .service-card:hover .service-icon { background: var(--oc-teal); color: #fff; transform: rotate(-6deg) scale(1.08); }
+    .service-card h3 { font-family: var(--oc-font-display); font-size: 26px; font-weight: 400; letter-spacing: -0.01em; margin: 0 0 12px; line-height: 1.15; }
+    .service-card p { color: var(--oc-ink-mute); font-size: 14.5px; line-height: 1.65; margin: 0 0 24px; }
+    .service-card-link {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--oc-teal-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* === BEFORE / AFTER === */
+    .ba-section { background: var(--oc-bg-soft); }
+    .ba-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 64px;
+      margin-bottom: 56px;
+    }
+    .ba-head h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5.5vw, 80px);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      margin: 24px 0 0;
+    }
+    .ba-head h2 em { color: var(--oc-teal); font-style: italic; }
+    .ba-head p { color: var(--oc-ink-mute); font-size: 16px; max-width: 440px; }
+
+    .ba-slider {
+      position: relative;
+      aspect-ratio: 16/9;
+      border-radius: var(--oc-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--oc-shadow-md);
+      cursor: ew-resize;
+      user-select: none;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ba-half {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ba-before {
+      background:
+        radial-gradient(ellipse at center, #c8b8a8 0%, #8a7a6a 100%);
+    }
+    .ba-after {
+      background:
+        radial-gradient(ellipse at center, #fff 0%, #d8eef0 100%);
+      clip-path: inset(0 0 0 50%);
+      transition: clip-path .1s linear;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    .ba-handle::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230B5C66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 18l-6-6 6-6M9 18l-6-6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 28px;
+    }
+    .ba-label {
+      position: absolute;
+      bottom: 24px;
+      padding: 8px 16px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: var(--oc-radius-pill);
+      backdrop-filter: blur(8px);
+    }
+    .ba-label-before { left: 24px; }
+    .ba-label-after { right: 24px; background: var(--oc-teal); }
+    .ba-smile { width: 60%; }
+
+    /* === SPECIALISTS === */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .spec-card {
+      background: var(--oc-surface);
+      border-radius: var(--oc-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--oc-line);
+      transition: transform .5s var(--oc-ease), box-shadow .5s;
+    }
+    .spec-card:hover { transform: translateY(-6px); box-shadow: var(--oc-shadow-md); }
+    .spec-photo {
+      aspect-ratio: 4/3;
+      background: linear-gradient(160deg, var(--oc-teal-soft) 0%, var(--oc-bg-warm) 100%);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .spec-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 50% at 50% 100%, var(--oc-ink) 0%, transparent 60%);
+      opacity: 0.18;
+    }
+    .spec-silhouette {
+      width: 60%;
+      max-width: 280px;
+      color: rgba(10,26,31,0.40);
+      position: relative;
+      z-index: 1;
+    }
+    .spec-body { padding: 32px 36px 36px; }
+    .spec-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--oc-teal-deep);
+      font-weight: 600;
+    }
+    .spec-name { font-family: var(--oc-font-display); font-size: 36px; font-weight: 400; letter-spacing: -0.02em; margin: 14px 0 12px; line-height: 1.05; }
+    .spec-bio { color: var(--oc-ink-mute); font-size: 14.5px; line-height: 1.65; margin: 0 0 20px; }
+    .spec-creds { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; border-top: 1px solid var(--oc-line); }
+    .spec-creds li {
+      display: flex;
+      gap: 10px;
+      color: var(--oc-ink-mute);
+      font-size: 13.5px;
+      list-style: none;
+    }
+    .spec-creds li::before { content: '✦'; color: var(--oc-teal); }
+
+    /* === LOCATIONS === */
+    .locs-section {
+      background: var(--oc-ink);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .locs-section::before {
+      content: '';
+      position: absolute;
+      bottom: -300px; left: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(14,127,140,0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .locs-inner { max-width: var(--oc-max); margin: 0 auto; position: relative; padding: clamp(80px, 10vw, 140px) 24px; }
+    .locs-head { text-align: center; margin-bottom: 64px; }
+    .locs-head h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5.5vw, 80px);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      color: #fff;
+      margin: 24px 0 16px;
+    }
+    .locs-head h2 em { color: var(--oc-teal-bright); font-style: italic; }
+    .locs-head p { color: rgba(255,255,255,0.65); max-width: 540px; margin: 0 auto; font-size: 17px; }
+
+    .locs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .loc-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--oc-radius-lg);
+      padding: 32px;
+      transition: background .4s var(--oc-ease), border-color .4s, transform .4s;
+      backdrop-filter: blur(8px);
+    }
+    .loc-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(20,160,174,0.40);
+      transform: translateY(-6px);
+    }
+    .loc-name {
+      font-family: var(--oc-font-display);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .loc-addr { color: rgba(255,255,255,0.62); font-size: 14px; line-height: 1.55; margin: 0 0 24px; }
+    .loc-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--oc-teal-bright);
+      font-family: var(--oc-font-mono);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .loc-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .loc-actions a {
+      flex: 1;
+      min-width: 110px;
+      padding: 12px 16px;
+      text-align: center;
+      border-radius: var(--oc-radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background .3s, color .3s, border-color .3s;
+      border: 1px solid;
+    }
+    .loc-actions .loc-map {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.18);
+    }
+    .loc-actions .loc-map:hover { background: #fff; color: var(--oc-ink); border-color: #fff; }
+    .loc-actions .loc-wa {
+      background: var(--oc-teal);
+      color: #fff;
+      border-color: var(--oc-teal);
+    }
+    .loc-actions .loc-wa:hover { background: var(--oc-teal-bright); border-color: var(--oc-teal-bright); }
+
+    /* === TESTIMONIALS === */
+    .test-section { background: var(--oc-bg); }
+    .test-head { text-align: center; margin-bottom: 56px; }
+    .test-head h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      margin: 24px 0 0;
+    }
+    .test-head h2 em { color: var(--oc-teal); font-style: italic; }
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .test-card {
+      background: var(--oc-surface);
+      border-radius: var(--oc-radius-lg);
+      padding: 36px 32px;
+      border: 1px solid var(--oc-line);
+      transition: transform .5s var(--oc-ease), box-shadow .5s;
+      position: relative;
+    }
+    .test-card:hover { transform: translateY(-4px); box-shadow: var(--oc-shadow-md); }
+    .test-card::before {
+      content: '"';
+      position: absolute;
+      top: 14px;
+      right: 28px;
+      font-family: var(--oc-font-display);
+      font-size: 96px;
+      line-height: 1;
+      color: var(--oc-teal-tint);
+    }
+    .test-stars { color: #F5B544; display: flex; gap: 2px; font-size: 14px; margin-bottom: 16px; }
+    .test-body {
+      font-family: var(--oc-font-display);
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      color: var(--oc-ink);
+      margin: 0 0 28px;
+    }
+    .test-meta { display: flex; align-items: center; gap: 14px; }
+    .test-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--oc-teal), var(--oc-teal-deep));
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--oc-font-display);
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .test-name { font-weight: 600; font-size: 14px; color: var(--oc-ink); }
+    .test-when { font-size: 12px; color: var(--oc-ink-soft); letter-spacing: 0.06em; }
+
+    /* === FAQ === */
+    .faq-section { background: var(--oc-bg-soft); }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-grid > div h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      margin: 24px 0 24px;
+    }
+    .faq-grid > div h2 em { color: var(--oc-teal); font-style: italic; }
+    .faq-grid > div p { color: var(--oc-ink-mute); font-size: 16px; line-height: 1.65; margin: 0 0 32px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--oc-line);
+      padding: 24px 0;
+      cursor: pointer;
+    }
+    .faq-item summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--oc-font-display);
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--oc-ink);
+      cursor: pointer;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 300;
+      transition: transform .4s var(--oc-ease), background .3s;
+    }
+    .faq-item[open] summary::after { content: '−'; background: var(--oc-teal); color: #fff; transform: rotate(180deg); }
+    .faq-item p {
+      margin: 18px 0 0;
+      color: var(--oc-ink-mute);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    /* === FINAL CTA === */
+    .cta-section {
+      padding: clamp(80px, 10vw, 140px) 24px;
+      background:
+        radial-gradient(60% 50% at 50% 0%, var(--oc-teal-tint) 0%, transparent 60%),
+        var(--oc-bg);
+      text-align: center;
+    }
+    .cta-inner { max-width: 800px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(46px, 6.5vw, 96px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin: 24px 0 24px;
+    }
+    .cta-inner h2 em { color: var(--oc-teal); font-style: italic; }
+    .cta-inner p { color: var(--oc-ink-mute); font-size: 18px; max-width: 540px; margin: 0 auto 36px; line-height: 1.6; }
+    .cta-ctas { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .cta-fine { margin-top: 32px; font-size: 12px; color: var(--oc-ink-soft); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 980px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { max-width: 420px; margin: 0 auto; }
+      .promise-grid, .ba-head, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid, .locs-grid, .test-grid, .specs-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 640px) and (max-width: 980px) {
+      .services-grid, .test-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="oc-eyebrow" data-reveal>Ortodoncia · Odontología · Estética</span>
+        <h1 class="hero-h1" data-reveal data-reveal-delay="1">
+          Sonrisas que <em>cambian vidas</em>, hechas en Panamá.
+        </h1>
+        <p class="hero-sub" data-reveal data-reveal-delay="2">
+          Especialistas certificados, tecnología láser y planes con promoción <strong style="color: var(--oc-coral);">sin abono inicial</strong>. Tres sucursales: Los Andes Mall, Coronado y Costa Verde.
+        </p>
+        <div class="hero-ctas" data-reveal data-reveal-delay="3">
+          <a class="oc-btn oc-btn-teal oc-btn-lg" href="/agenda">
+            Agenda tu evaluación
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="oc-btn oc-btn-outline oc-btn-lg" href="/servicios">Ver servicios</a>
+        </div>
+
+        <div class="hero-trust" data-reveal data-reveal-delay="4">
+          <div class="hero-trust-item">
+            <span class="num"><span data-count="20" data-suffix="+">0</span></span>
+            <span class="lbl">Años de experiencia</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="num"><span data-count="3" data-suffix="">0</span></span>
+            <span class="lbl">Sucursales en Panamá</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="num"><em><span data-count="4.9" data-suffix="">0</span></em></span>
+            <span class="lbl">Rating en redes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal data-reveal-delay="2">
+        <div class="hero-photo">
+          <div class="hero-smile">
+            <!-- Smile illustration -->
+            <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <defs>
+                <linearGradient id="lip-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E07B5F"/>
+                  <stop offset="1" stop-color="#B85B40"/>
+                </linearGradient>
+                <linearGradient id="tooth-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FFFFFF"/>
+                  <stop offset="1" stop-color="#E5F2F4"/>
+                </linearGradient>
+              </defs>
+              <!-- Lips -->
+              <path d="M40 160 Q200 60, 360 160 Q200 280, 40 160 Z" fill="url(#lip-grad)"/>
+              <!-- Mouth opening -->
+              <path d="M70 160 Q200 100, 330 160 Q200 220, 70 160 Z" fill="#3a1810"/>
+              <!-- Teeth -->
+              <g fill="url(#tooth-grad)">
+                <rect x="100" y="135" width="22" height="38" rx="4"/>
+                <rect x="128" y="128" width="26" height="44" rx="4"/>
+                <rect x="160" y="124" width="28" height="48" rx="4"/>
+                <rect x="194" y="124" width="28" height="48" rx="4"/>
+                <rect x="228" y="128" width="26" height="44" rx="4"/>
+                <rect x="260" y="135" width="22" height="38" rx="4"/>
+              </g>
+              <!-- Highlight on tooth -->
+              <rect x="166" y="130" width="6" height="20" rx="3" fill="#fff" opacity="0.8"/>
+              <rect x="200" y="130" width="6" height="20" rx="3" fill="#fff" opacity="0.8"/>
+              <!-- Sparkle -->
+              <g transform="translate(310,80)">
+                <path d="M0 -16 L4 -4 L16 0 L4 4 L0 16 L-4 4 L-16 0 L-4 -4 Z" fill="#15A0AE"/>
+              </g>
+              <g transform="translate(70,80)">
+                <path d="M0 -10 L3 -3 L10 0 L3 3 L0 10 L-3 3 L-10 0 L-3 -3 Z" fill="#A4D8AE"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="hero-card-rating">
+          <div class="stars">★★★★★</div>
+          <div>
+            <div class="num">4.9</div>
+            <div class="lbl">344 reseñas</div>
+          </div>
+        </div>
+
+        <div class="hero-card-locs">
+          <h5>3 sucursales</h5>
+          <p>Andes, Coronado <em>&</em> Costa Verde</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="oc-marquee" aria-hidden="true">
+    <div class="oc-marquee-track">
+      <span>Brackets metálicos</span>
+      <span>Ortodoncia invisible</span>
+      <span>Blanqueamiento</span>
+      <span>Láser dental</span>
+      <span>Endodoncia</span>
+      <span>Limpieza profunda</span>
+      <span>Brackets metálicos</span>
+      <span>Ortodoncia invisible</span>
+      <span>Blanqueamiento</span>
+      <span>Láser dental</span>
+      <span>Endodoncia</span>
+      <span>Limpieza profunda</span>
+    </div>
+  </div>
+
+  <section class="promise oc-section">
+    <div class="promise-inner">
+      <div class="promise-grid">
+        <div>
+          <span class="oc-eyebrow is-light" data-reveal>Por qué OrthoClinic</span>
+          <h2 data-reveal data-reveal-delay="1">
+            Más que una clínica:<br>una <em>experiencia</em> dental.
+          </h2>
+        </div>
+        <div class="promise-list">
+          <div class="promise-item" data-reveal data-reveal-delay="2">
+            <div class="promise-num">01</div>
+            <div>
+              <h3>Especialistas certificados</h3>
+              <p>Dr. Tomás Tejada y Dr. Carlos Núñez, ortodoncistas con formación nacional e internacional. Práctica limitada a ortodoncia para resultados predecibles.</p>
+            </div>
+          </div>
+          <div class="promise-item" data-reveal data-reveal-delay="3">
+            <div class="promise-num">02</div>
+            <div>
+              <h3>Tecnología láser de punta</h3>
+              <p>Gingivectomía, gingivoplastia, frenectomía y aceleración de movimiento ortodóntico con láser — menos molestia, menos tiempo de recuperación.</p>
+            </div>
+          </div>
+          <div class="promise-item" data-reveal data-reveal-delay="4">
+            <div class="promise-num">03</div>
+            <div>
+              <h3>Planes accesibles</h3>
+              <p>Promoción sin abono inicial en brackets metálicos. Cubrimos limpieza, fotografías dentales, colocación y retenedores finales en un solo plan.</p>
+            </div>
+          </div>
+          <div class="promise-item" data-reveal data-reveal-delay="5">
+            <div class="promise-num">04</div>
+            <div>
+              <h3>3 sucursales, una sola promesa</h3>
+              <p>Los Andes Mall, Coronado y Costa Verde. Mismo nivel de cuidado, mismo equipo, donde te quede más cómodo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section">
+    <div class="oc-container">
+      <div class="services-head">
+        <span class="oc-eyebrow is-center" data-reveal>Tratamientos</span>
+        <h2 data-reveal data-reveal-delay="1">Todo lo que tu sonrisa <em>necesita</em>.</h2>
+        <p data-reveal data-reveal-delay="2">Desde ortodoncia de alto nivel hasta restauraciones estéticas, endodoncia y cirugía. Un equipo, un solo lugar.</p>
+      </div>
+
+      <div class="services-grid">
+        <a class="service-card" href="/servicios#brackets" data-reveal>
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z"/><path d="M8 12h8M12 8v8"/></svg>
+          </div>
+          <h3>Brackets metálicos, cerámicos y autoligado</h3>
+          <p>Tratamiento ortodóntico completo: limpieza, fotografías, colocación y retenedores finales. <strong style="color:var(--oc-coral);">Promoción sin abono inicial.</strong></p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="service-card" href="/servicios#invisible" data-reveal data-reveal-delay="1">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4-4 7-8 8-4-1-8-4-8-8V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Ortodoncia invisible</h3>
+          <p>Evaluación profesional para alinear tu sonrisa sin que se note. Cómoda, removible y predecible.</p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="service-card" href="/servicios#blanqueamiento" data-reveal data-reveal-delay="2">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <h3>Blanqueamiento</h3>
+          <p>Devuelve el brillo natural a tu sonrisa. Procedimiento seguro en consultorio con resultados visibles desde la primera sesión.</p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="service-card" href="/servicios#laser" data-reveal>
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M5 8l14 8M5 16l14-8"/></svg>
+          </div>
+          <h3>Tratamientos con láser</h3>
+          <p>Gingivectomía, gingivoplastia, frenectomía, terapia de dolor y aceleración del movimiento ortodóntico. Menos molestias, mejor recuperación.</p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="service-card" href="/servicios#estetica" data-reveal data-reveal-delay="1">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          </div>
+          <h3>Restauraciones estéticas</h3>
+          <p>Carillas, resinas y reconstrucciones que devuelven forma, función y belleza a tus dientes — sin sacrificar lo natural.</p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <a class="service-card" href="/servicios#endodoncia" data-reveal data-reveal-delay="2">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 4 2 6 3 9 .5 1.5 1 4 4 4s3.5-2.5 4-4c1-3 3-5 3-9 0-4-3-7-7-7z"/></svg>
+          </div>
+          <h3>Endodoncia y cirugía</h3>
+          <p>Tratamiento de conducto, cirugía de terceras molares, radiografías panorámicas y cefalométricas. Diagnóstico claro, plan honesto.</p>
+          <span class="service-card-link">Ver detalle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section ba-section">
+    <div class="oc-container">
+      <div class="ba-head">
+        <div>
+          <span class="oc-eyebrow" data-reveal>Resultados reales</span>
+          <h2 data-reveal data-reveal-delay="1">El antes y el <em>después</em>.</h2>
+        </div>
+        <div>
+          <p data-reveal data-reveal-delay="2">
+            Arrastra el control para ver lo que un plan de ortodoncia bien hecho puede lograr. Cada paciente, cada caso, con seguimiento de principio a fin.
+          </p>
+          <a class="oc-btn oc-btn-ink" href="/agenda" data-reveal data-reveal-delay="3">
+            Quiero mi evaluación
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="ba-slider" id="baSlider" data-reveal>
+        <div class="ba-half ba-before">
+          <svg class="ba-smile" viewBox="0 0 400 200" fill="none">
+            <path d="M40 100 Q200 30, 360 100 Q200 180, 40 100 Z" fill="#7a5a3a"/>
+            <path d="M70 100 Q200 60, 330 100 Q200 140, 70 100 Z" fill="#2a1810"/>
+            <g fill="#dac8a8">
+              <rect x="100" y="85" width="22" height="32" rx="3" transform="rotate(8 111 101)"/>
+              <rect x="128" y="80" width="26" height="38" rx="3" transform="rotate(-5 141 99)"/>
+              <rect x="160" y="78" width="28" height="40" rx="3" transform="rotate(6 174 98)"/>
+              <rect x="194" y="82" width="28" height="38" rx="3" transform="rotate(-7 208 101)"/>
+              <rect x="228" y="80" width="26" height="38" rx="3" transform="rotate(5 241 99)"/>
+              <rect x="260" y="86" width="22" height="32" rx="3" transform="rotate(-4 271 102)"/>
+            </g>
+          </svg>
+          <span class="ba-label ba-label-before">Antes</span>
+        </div>
+        <div class="ba-half ba-after" id="baAfter">
+          <svg class="ba-smile" viewBox="0 0 400 200" fill="none">
+            <path d="M40 100 Q200 30, 360 100 Q200 180, 40 100 Z" fill="#E07B5F"/>
+            <path d="M70 100 Q200 60, 330 100 Q200 140, 70 100 Z" fill="#2a1810"/>
+            <g fill="#ffffff">
+              <rect x="100" y="85" width="22" height="32" rx="3"/>
+              <rect x="128" y="80" width="26" height="38" rx="3"/>
+              <rect x="160" y="78" width="28" height="40" rx="3"/>
+              <rect x="194" y="78" width="28" height="40" rx="3"/>
+              <rect x="228" y="80" width="26" height="38" rx="3"/>
+              <rect x="260" y="85" width="22" height="32" rx="3"/>
+            </g>
+          </svg>
+          <span class="ba-label ba-label-after">Después</span>
+        </div>
+        <div class="ba-handle" id="baHandle"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section">
+    <div class="oc-container">
+      <div class="services-head">
+        <span class="oc-eyebrow is-center" data-reveal>Nuestros especialistas</span>
+        <h2 data-reveal data-reveal-delay="1">Las <em>manos</em> detrás de cada sonrisa.</h2>
+      </div>
+
+      <div class="specs-grid">
+        <article class="spec-card" data-reveal>
+          <div class="spec-photo">
+            <svg class="spec-silhouette" viewBox="0 0 200 240" fill="currentColor">
+              <circle cx="100" cy="70" r="40"/>
+              <path d="M40 240 C 40 170, 80 140, 100 140 C 120 140, 160 170, 160 240 Z"/>
+            </svg>
+          </div>
+          <div class="spec-body">
+            <span class="spec-eyebrow">Director · Ortodoncista</span>
+            <h3 class="spec-name">Dr. Tomás Tejada</h3>
+            <p class="spec-bio">Odontólogo General egresado de la Universidad de Panamá (1997) y especialista en Ortodoncia. Práctica limitada exclusivamente a ortodoncia y clínica integral.</p>
+            <ul class="spec-creds">
+              <li>Especialista en Ortodoncia, ULACIT/UIP (2004)</li>
+              <li>Maestría en Educación Superior, UDI (2016)</li>
+              <li>Profesor — Universidad Latina de Panamá</li>
+              <li>Cursos de perfeccionamiento nacional e internacional</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card" data-reveal data-reveal-delay="1">
+          <div class="spec-photo">
+            <svg class="spec-silhouette" viewBox="0 0 200 240" fill="currentColor">
+              <circle cx="100" cy="70" r="40"/>
+              <path d="M40 240 C 40 170, 80 140, 100 140 C 120 140, 160 170, 160 240 Z"/>
+            </svg>
+          </div>
+          <div class="spec-body">
+            <span class="spec-eyebrow">Ortodoncista</span>
+            <h3 class="spec-name">Dr. Carlos Núñez</h3>
+            <p class="spec-bio">Odontólogo General egresado de la Universidad de Panamá (1997) y especialista en Ortodoncia ULACIT/UIP. Práctica limitada a ortodoncia.</p>
+            <ul class="spec-creds">
+              <li>Especialista en Ortodoncia, ULACIT/UIP (2004)</li>
+              <li>Cursos de entrenamiento nacional e internacional</li>
+              <li>Atención integral y seguimiento personalizado</li>
+              <li>Enfoque en resultados predecibles</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="locs-section">
+    <div class="locs-inner">
+      <div class="locs-head">
+        <span class="oc-eyebrow is-center is-light" data-reveal>3 sucursales · Panamá</span>
+        <h2 data-reveal data-reveal-delay="1">Estamos donde te queda <em>más cómodo</em>.</h2>
+        <p data-reveal data-reveal-delay="2">Mismo equipo, mismos estándares. Elige la sucursal y agenda tu cita en menos de un minuto.</p>
+      </div>
+
+      <div class="locs-grid">
+        <article class="loc-card" data-reveal>
+          <h3 class="loc-name">Los Andes Mall</h3>
+          <p class="loc-addr">Primer Nivel, Local 135-A<br>Vía Tocumen, Ciudad de Panamá</p>
+          <a class="loc-phone" href="tel:+50766734766">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            6673-4766
+          </a>
+          <div class="loc-actions">
+            <a class="loc-map" href="https://www.google.com/maps/place/OrthoClinic+Panam%C3%A1/@9.0522233,-79.5108441,17z" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="loc-wa" href="https://wa.me/50766734766?text=Hola%20OrthoClinic%20Los%20Andes%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="loc-card" data-reveal data-reveal-delay="1">
+          <h3 class="loc-name">Coronado</h3>
+          <p class="loc-addr">Centro Comercial The Village Coronado<br>Segunda Planta, Local 15</p>
+          <a class="loc-phone" href="tel:+50763400028">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            6340-0028
+          </a>
+          <div class="loc-actions">
+            <a class="loc-map" href="https://maps.app.goo.gl/ZnA58jYfvvtZ6tFA7" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="loc-wa" href="https://wa.me/50763400028?text=Hola%20OrthoClinic%20Coronado%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="loc-card" data-reveal data-reveal-delay="2">
+          <h3 class="loc-name">Costa Verde</h3>
+          <p class="loc-addr">Centro Comercial Costa Verde<br>Arraiján, Panamá</p>
+          <a class="loc-phone" href="tel:+50767296810">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            6729-6810
+          </a>
+          <div class="loc-actions">
+            <a class="loc-map" href="https://www.google.com/maps?q=costa+verde+orthoclinic" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="loc-wa" href="https://wa.me/50767296810?text=Hola%20OrthoClinic%20Costa%20Verde%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section test-section">
+    <div class="oc-container">
+      <div class="test-head">
+        <span class="oc-eyebrow is-center" data-reveal>Pacientes felices</span>
+        <h2 data-reveal data-reveal-delay="1">Lo que <em>dicen</em> de OrthoClinic.</h2>
+      </div>
+
+      <div class="test-grid">
+        <div class="test-card" data-reveal>
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"El Dr. Tejada me explicó cada paso del tratamiento. Hoy uso mis retenedores y mi sonrisa cambió por completo."</p>
+          <div class="test-meta">
+            <div class="test-avatar">M</div>
+            <div>
+              <div class="test-name">María C.</div>
+              <div class="test-when">Brackets · Los Andes Mall</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card" data-reveal data-reveal-delay="1">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"Llegué con un tratamiento incompleto de otra clínica y me recibieron sin juzgar. Profesionalismo del primer día."</p>
+          <div class="test-meta">
+            <div class="test-avatar">J</div>
+            <div>
+              <div class="test-name">Joel R.</div>
+              <div class="test-when">Endodoncia · Coronado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card" data-reveal data-reveal-delay="2">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"Hicieron la frenectomía con láser a mi hija de 7 años. Cero llanto, todo rapidísimo. El equipo es increíble."</p>
+          <div class="test-meta">
+            <div class="test-avatar">A</div>
+            <div>
+              <div class="test-name">Andrea V.</div>
+              <div class="test-when">Láser · Costa Verde</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section faq-section">
+    <div class="oc-container">
+      <div class="faq-grid">
+        <div>
+          <span class="oc-eyebrow" data-reveal>Preguntas frecuentes</span>
+          <h2 data-reveal data-reveal-delay="1">Antes de tu <em>primera cita</em>.</h2>
+          <p data-reveal data-reveal-delay="2">Las dudas más comunes que recibimos en consulta. Si la tuya no está aquí, escríbenos por WhatsApp y te respondemos personalmente.</p>
+          <a class="oc-btn oc-btn-ink" href="/agenda" data-reveal data-reveal-delay="3">
+            Pide tu evaluación
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" data-reveal>
+            <summary>¿Qué incluye la promoción sin abono inicial?</summary>
+            <p>El plan de brackets metálicos incluye limpieza dental, fotografías dentales, colocación de brackets superiores e inferiores y retenedores finales. Sin pago inicial — comenzamos con cuotas mensuales accesibles.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>¿La primera evaluación tiene costo?</summary>
+            <p>Coordinamos una evaluación profesional con el ortodoncista. Te explicamos opciones, tiempos y planes de pago antes de cualquier compromiso.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>¿Cuánto tiempo dura un tratamiento de ortodoncia?</summary>
+            <p>Cada caso es único, pero la mayoría de los tratamientos toma entre 12 y 24 meses. En la evaluación inicial te damos un estimado real basado en tu caso.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>¿Qué es el tratamiento con láser?</summary>
+            <p>Usamos láser para gingivectomía, gingivoplastia, frenectomía, terapia de dolor y aceleración de movimiento ortodóntico. Menos molestia, menos sangrado y recuperación más rápida.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>¿Atienden niños y adolescentes?</summary>
+            <p>Sí. Recomendamos una primera evaluación ortodóntica alrededor de los 7 años para detectar y corregir a tiempo.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>¿Cuál sucursal me queda mejor?</summary>
+            <p>Tenemos 3 sucursales: Los Andes Mall (este de la ciudad), Coronado (interior) y Costa Verde (Arraiján). Todas con el mismo equipo y los mismos estándares.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="oc-eyebrow is-center" data-reveal>Empieza hoy</span>
+      <h2 data-reveal data-reveal-delay="1">Tu nueva sonrisa <em>empieza</em> con una cita.</h2>
+      <p data-reveal data-reveal-delay="2">Reserva tu evaluación profesional. Te explicamos tu caso, opciones y plan de pago — sin compromiso.</p>
+      <div class="cta-ctas" data-reveal data-reveal-delay="3">
+        <a class="oc-btn oc-btn-teal oc-btn-lg" href="/agenda">
+          Agendar evaluación
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="oc-btn oc-btn-whatsapp oc-btn-lg" href="https://wa.me/50766734766?text=Hola%20OrthoClinic%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">
+          Escribir por WhatsApp
+        </a>
+      </div>
+      <p class="cta-fine" data-reveal data-reveal-delay="4">Respondemos en menos de 30 minutos en horario hábil</p>
+    </div>
+  </section>
+
+  <script src="/shared/nav-footer.js?v=1"></script>
+  <script>
+    // === Before/After slider ===
+    (function() {
+      const slider = document.getElementById('baSlider');
+      const after = document.getElementById('baAfter');
+      const handle = document.getElementById('baHandle');
+      if (!slider) return;
+      let dragging = false;
+      function setPct(pct) {
+        pct = Math.max(0, Math.min(100, pct));
+        after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+        handle.style.left = pct + '%';
+      }
+      function pctFromEvent(e) {
+        const rect = slider.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        return (x / rect.width) * 100;
+      }
+      slider.addEventListener('mousedown', e => { dragging = true; setPct(pctFromEvent(e)); });
+      slider.addEventListener('touchstart', e => { dragging = true; setPct(pctFromEvent(e)); }, { passive: true });
+      window.addEventListener('mousemove', e => { if (dragging) setPct(pctFromEvent(e)); });
+      window.addEventListener('touchmove', e => { if (dragging) setPct(pctFromEvent(e)); }, { passive: true });
+      window.addEventListener('mouseup', () => dragging = false);
+      window.addEventListener('touchend', () => dragging = false);
+      // Demo wiggle
+      let demo = true;
+      slider.addEventListener('mouseenter', () => demo = false);
+      slider.addEventListener('touchstart', () => demo = false);
+      let dir = 1, p = 50;
+      function wiggle() {
+        if (!demo) return;
+        p += dir * 0.25;
+        if (p > 62) dir = -1;
+        if (p < 38) dir = 1;
+        setPct(p);
+        requestAnimationFrame(wiggle);
+      }
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting && demo) wiggle(); });
+      });
+      io.observe(slider);
+    })();
+  </script>
+</body>
+</html>

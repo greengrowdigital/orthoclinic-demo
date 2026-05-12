@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sucursales — OrthoClinic Panamá</title>
+  <meta name="description" content="3 sucursales OrthoClinic: Los Andes Mall, Coronado y Costa Verde. Teléfonos, direcciones y rutas de acceso." />
+  <meta name="theme-color" content="#0E7F8C" />
+  <link rel="icon" href="/public/logo-mark.svg" type="image/svg+xml" />
+  <link href="/shared/theme.css?v=1" rel="stylesheet" />
+  <style>
+    .page-hero {
+      padding: calc(var(--oc-nav-h) + 80px) 24px 80px;
+      background:
+        radial-gradient(60% 50% at 90% 10%, var(--oc-teal-tint) 0%, transparent 60%),
+        radial-gradient(40% 40% at 5% 90%, var(--oc-coral-tint) 0%, transparent 60%),
+        var(--oc-bg);
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(50px, 8vw, 120px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin: 24px 0 24px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .page-hero p { color: var(--oc-ink-mute); font-size: 18px; max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    .branch-block {
+      padding: clamp(80px, 10vw, 140px) 24px;
+      border-bottom: 1px solid var(--oc-line);
+    }
+    .branch-block:nth-child(even) { background: var(--oc-bg-soft); }
+    .branch-inner {
+      max-width: var(--oc-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .branch-block:nth-child(even) .branch-inner > div:first-child { order: 2; }
+
+    .branch-num {
+      font-family: var(--oc-font-display);
+      font-size: clamp(120px, 16vw, 220px);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--oc-teal-tint);
+      letter-spacing: -0.05em;
+      margin-bottom: -40px;
+      font-style: italic;
+    }
+    .branch-block h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(42px, 5.5vw, 76px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      margin: 0 0 24px;
+    }
+    .branch-block h2 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .branch-info { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+    .branch-row {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--oc-line);
+    }
+    .branch-row svg { color: var(--oc-teal); margin-top: 2px; }
+    .branch-row strong { display: block; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--oc-ink-soft); margin-bottom: 6px; }
+    .branch-row span { font-size: 16px; line-height: 1.5; color: var(--oc-ink); }
+    .branch-row span.mono { font-family: var(--oc-font-mono); font-weight: 600; color: var(--oc-teal-deep); }
+    .branch-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+
+    .branch-map-wrap {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: var(--oc-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--oc-shadow-lg);
+    }
+    .branch-map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: grayscale(0.25) contrast(0.95);
+    }
+    .branch-map-card {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(14px);
+      padding: 20px 24px;
+      border-radius: var(--oc-radius-md);
+      box-shadow: var(--oc-shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      pointer-events: none;
+    }
+    .branch-map-card svg { color: var(--oc-teal); flex-shrink: 0; }
+    .branch-map-card h4 { font-family: var(--oc-font-display); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; margin: 0; }
+    .branch-map-card p { margin: 4px 0 0; color: var(--oc-ink-mute); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .branch-inner, .branch-block:nth-child(even) .branch-inner { grid-template-columns: 1fr; gap: 40px; }
+      .branch-block:nth-child(even) .branch-inner > div:first-child { order: 0; }
+      .branch-map-wrap { aspect-ratio: 1; max-width: 520px; margin: 0 auto; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page-hero">
+    <span class="oc-eyebrow is-center" data-reveal>3 sucursales · Panamá</span>
+    <h1 data-reveal data-reveal-delay="1">Donde te queda <em>más cerca</em>.</h1>
+    <p data-reveal data-reveal-delay="2">Tres ubicaciones estratégicas con el mismo equipo y los mismos estándares. Mira los detalles, llama, o agenda por WhatsApp directo desde aquí.</p>
+  </section>
+
+  <!-- Andes -->
+  <section class="branch-block" id="andes">
+    <div class="branch-inner">
+      <div data-reveal>
+        <div class="branch-num">01</div>
+        <span class="oc-eyebrow">Sucursal · Ciudad de Panamá</span>
+        <h2>Los Andes <em>Mall</em>.</h2>
+        <div class="branch-info">
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><strong>Dirección</strong><span>Primer Nivel, Local 135-A · Centro Comercial Los Andes Mall, Vía Tocumen</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><strong>Teléfonos</strong><span class="mono">6673-4766 · 392-6698 · 392-6699</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div><strong>Horarios</strong><span>Lun–Vie 9:00–19:00 · Sáb 9:00–14:00</span></div>
+          </div>
+        </div>
+        <div class="branch-actions">
+          <a class="oc-btn oc-btn-teal" href="https://wa.me/50766734766?text=Hola%20OrthoClinic%20Los%20Andes%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">
+            WhatsApp Los Andes
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="oc-btn oc-btn-outline" href="https://www.google.com/maps/place/OrthoClinic+Panam%C3%A1/@9.0522233,-79.5108441,17z" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="branch-map-wrap" data-reveal>
+        <iframe src="https://www.google.com/maps?q=OrthoClinic+Los+Andes+Mall+Panama&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Los Andes Mall"></iframe>
+        <div class="branch-map-card">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <h4>Los Andes Mall</h4>
+            <p>Primer Nivel, Local 135-A</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coronado -->
+  <section class="branch-block" id="coronado">
+    <div class="branch-inner">
+      <div data-reveal>
+        <div class="branch-num">02</div>
+        <span class="oc-eyebrow">Sucursal · Interior</span>
+        <h2>The Village <em>Coronado</em>.</h2>
+        <div class="branch-info">
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><strong>Dirección</strong><span>Centro Comercial The Village Coronado · Segunda Planta, Local 15</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><strong>Teléfonos</strong><span class="mono">6340-0028 · 345-3315 · 345-3317</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div><strong>Horarios</strong><span>Lun–Vie 9:00–18:00 · Sáb 9:00–14:00</span></div>
+          </div>
+        </div>
+        <div class="branch-actions">
+          <a class="oc-btn oc-btn-teal" href="https://wa.me/50763400028?text=Hola%20OrthoClinic%20Coronado%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">
+            WhatsApp Coronado
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="oc-btn oc-btn-outline" href="https://maps.app.goo.gl/ZnA58jYfvvtZ6tFA7" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="branch-map-wrap" data-reveal>
+        <iframe src="https://www.google.com/maps?q=The+Village+Coronado+OrthoClinic&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Coronado"></iframe>
+        <div class="branch-map-card">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <h4>The Village Coronado</h4>
+            <p>Segunda Planta, Local 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Costa Verde -->
+  <section class="branch-block" id="costaverde">
+    <div class="branch-inner">
+      <div data-reveal>
+        <div class="branch-num">03</div>
+        <span class="oc-eyebrow">Sucursal · Panamá Oeste</span>
+        <h2>Costa <em>Verde</em>.</h2>
+        <div class="branch-info">
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><strong>Dirección</strong><span>Centro Comercial Costa Verde · Arraiján, Panamá Oeste</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><strong>Teléfono</strong><span class="mono">6729-6810</span></div>
+          </div>
+          <div class="branch-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div><strong>Horarios</strong><span>Lun–Vie 9:00–18:00 · Sáb 9:00–13:00</span></div>
+          </div>
+        </div>
+        <div class="branch-actions">
+          <a class="oc-btn oc-btn-teal" href="https://wa.me/50767296810?text=Hola%20OrthoClinic%20Costa%20Verde%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener">
+            WhatsApp Costa Verde
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="oc-btn oc-btn-outline" href="https://www.google.com/maps?q=costa+verde+orthoclinic" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="branch-map-wrap" data-reveal>
+        <iframe src="https://www.google.com/maps?q=Costa+Verde+Arraijan+Panama&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Costa Verde"></iframe>
+        <div class="branch-map-card">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <h4>Costa Verde</h4>
+            <p>Arraiján, Panamá Oeste</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section" style="background: var(--oc-ink); color: #fff; text-align: center; padding: clamp(80px, 10vw, 140px) 24px;">
+    <div class="oc-container">
+      <span class="oc-eyebrow is-center is-light" data-reveal>Una llamada, una sonrisa</span>
+      <h2 class="oc-display" style="font-size: clamp(40px, 6vw, 80px); color: #fff; margin: 24px 0 24px;" data-reveal data-reveal-delay="1">
+        Elige tu sucursal y <em>agenda</em> hoy.
+      </h2>
+      <p style="color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px;" data-reveal data-reveal-delay="2">Respondemos por WhatsApp en menos de 30 minutos en horario hábil. Sin compromiso, con un plan claro.</p>
+      <a class="oc-btn oc-btn-teal oc-btn-lg" href="/agenda" data-reveal data-reveal-delay="3">
+        Agendar evaluación
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <script src="/shared/nav-footer.js?v=1"></script>
+</body>
+</html>

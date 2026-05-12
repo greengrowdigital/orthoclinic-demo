@@ -1,0 +1,14 @@
+<svg width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#15A0AE"/>
+      <stop offset="1" stop-color="#0B5C66"/>
+    </linearGradient>
+  </defs>
+  <path d="M20 4 C 10 4 4 11 4 20 C 4 29 10 36 20 36 C 24 36 27 34.8 29.5 33" stroke="url(#lg)" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M14 20 C 14 16 16.5 13 20 13 C 23.5 13 26 16 26 20" stroke="#A4D8AE" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <circle cx="32" cy="32" r="3" fill="#15A0AE"/>
+  <text x="50" y="27" font-family="Fraunces, Georgia, serif" font-size="22" font-weight="400" fill="#0A1A1F" letter-spacing="-0.5">
+    <tspan fill="#0E7F8C" font-style="italic">Ortho</tspan>Clinic
+  </text>
+</svg>

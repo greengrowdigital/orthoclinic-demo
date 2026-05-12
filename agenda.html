@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Agenda tu evaluación — OrthoClinic Panamá</title>
+  <meta name="description" content="Agenda tu evaluación ortodóntica en OrthoClinic. 3 sucursales en Panamá. Respondemos en menos de 30 minutos." />
+  <meta name="theme-color" content="#0E7F8C" />
+  <link rel="icon" href="/public/logo-mark.svg" type="image/svg+xml" />
+  <link href="/shared/theme.css?v=1" rel="stylesheet" />
+  <style>
+    .book-page {
+      padding: calc(var(--oc-nav-h) + 60px) 0 0;
+      background:
+        radial-gradient(60% 50% at 90% 10%, var(--oc-teal-tint) 0%, transparent 60%),
+        var(--oc-bg);
+      min-height: 100vh;
+    }
+    .book-inner {
+      max-width: var(--oc-max);
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .book-left { position: sticky; top: calc(var(--oc-nav-h) + 24px); }
+    .book-left h1 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(48px, 6.5vw, 88px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin: 24px 0 24px;
+    }
+    .book-left h1 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .book-left .lede {
+      color: var(--oc-ink-mute);
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 0 36px;
+    }
+
+    .book-benefits { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+    .book-benefit {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--oc-line);
+      border-radius: var(--oc-radius-md);
+      backdrop-filter: blur(8px);
+    }
+    .book-benefit .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--oc-teal);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .book-benefit h4 { margin: 0 0 4px; font-size: 15px; font-weight: 600; color: var(--oc-ink); }
+    .book-benefit p { margin: 0; color: var(--oc-ink-mute); font-size: 13.5px; line-height: 1.5; }
+
+    /* Card form */
+    .book-card {
+      background: var(--oc-surface);
+      border-radius: var(--oc-radius-xl);
+      padding: 48px;
+      box-shadow: var(--oc-shadow-lg);
+      border: 1px solid var(--oc-line);
+      position: relative;
+      overflow: hidden;
+    }
+    .book-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--oc-teal), var(--oc-teal-bright), var(--oc-mint));
+    }
+    .book-step {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--oc-teal-deep);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .book-step .step-num {
+      width: 22px;
+      height: 22px;
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+    .book-card h2 {
+      font-family: var(--oc-font-display);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0 0 32px;
+    }
+
+    .book-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .book-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+    .book-pill {
+      padding: 12px 18px;
+      border: 1px solid var(--oc-line-strong);
+      border-radius: var(--oc-radius-pill);
+      background: var(--oc-surface);
+      cursor: pointer;
+      font-family: var(--oc-font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--oc-ink);
+      transition: all .25s var(--oc-ease);
+      user-select: none;
+    }
+    .book-pill:hover { border-color: var(--oc-teal); color: var(--oc-teal-deep); }
+    .book-pill.is-active {
+      background: var(--oc-ink);
+      color: #fff;
+      border-color: var(--oc-ink);
+    }
+
+    .book-fine {
+      font-size: 12px;
+      color: var(--oc-ink-soft);
+      margin-top: 18px;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    /* Success */
+    .book-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .book-success.is-on { display: block; }
+    .book-success-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: pop .6s var(--oc-ease-spring);
+    }
+    @keyframes pop {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    .book-success h3 {
+      font-family: var(--oc-font-display);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+    }
+    .book-success p {
+      color: var(--oc-ink-mute);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 28px;
+    }
+
+    @media (max-width: 980px) {
+      .book-inner { grid-template-columns: 1fr; gap: 40px; }
+      .book-left { position: static; }
+      .book-card { padding: 32px 28px; }
+      .book-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="book-page">
+    <div class="book-inner">
+      <div class="book-left">
+        <span class="oc-eyebrow" data-reveal>Agenda · Sin compromiso</span>
+        <h1 data-reveal data-reveal-delay="1">Tu evaluación <em>profesional</em>, en 3 pasos.</h1>
+        <p class="lede" data-reveal data-reveal-delay="2">Cuéntanos qué te interesa y a qué sucursal te queda mejor ir. Te confirmamos cita por WhatsApp en menos de 30 minutos en horario hábil.</p>
+
+        <div class="book-benefits" data-reveal data-reveal-delay="3">
+          <div class="book-benefit">
+            <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div>
+              <h4>Evaluación con especialista</h4>
+              <p>Te ve un ortodoncista certificado, no un asistente.</p>
+            </div>
+          </div>
+          <div class="book-benefit">
+            <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div>
+              <h4>Plan honesto y claro</h4>
+              <p>Te explicamos opciones, tiempos y costos — sin letra chica.</p>
+            </div>
+          </div>
+          <div class="book-benefit">
+            <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <div>
+              <h4>Sin abono inicial</h4>
+              <p>Promoción vigente en brackets metálicos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal data-reveal-delay="1">
+        <div class="book-card" id="bookCard">
+          <span class="book-step"><span class="step-num">1</span> Agenda tu cita</span>
+          <h2>Datos para coordinar tu evaluación</h2>
+
+          <form id="bookForm">
+            <div class="oc-field">
+              <label>Sucursal preferida</label>
+              <div class="book-pills" id="pillsBranch">
+                <span class="book-pill is-active" data-val="andes">Los Andes Mall</span>
+                <span class="book-pill" data-val="coronado">Coronado</span>
+                <span class="book-pill" data-val="costaverde">Costa Verde</span>
+              </div>
+              <input type="hidden" name="branch" id="branchVal" value="andes" />
+            </div>
+
+            <div class="oc-field">
+              <label>¿Qué te interesa?</label>
+              <div class="book-pills" id="pillsService">
+                <span class="book-pill is-active" data-val="Brackets / ortodoncia">Brackets / ortodoncia</span>
+                <span class="book-pill" data-val="Ortodoncia invisible">Ortodoncia invisible</span>
+                <span class="book-pill" data-val="Blanqueamiento">Blanqueamiento</span>
+                <span class="book-pill" data-val="Limpieza">Limpieza</span>
+                <span class="book-pill" data-val="Láser">Láser</span>
+                <span class="book-pill" data-val="Endodoncia / cirugía">Endodoncia / cirugía</span>
+                <span class="book-pill" data-val="No estoy seguro">No estoy seguro</span>
+              </div>
+              <input type="hidden" name="service" id="serviceVal" value="Brackets / ortodoncia" />
+            </div>
+
+            <div class="book-row">
+              <div class="oc-field">
+                <label>Nombre y apellido</label>
+                <input class="oc-input" type="text" name="name" required placeholder="Tu nombre" />
+              </div>
+              <div class="oc-field">
+                <label>WhatsApp</label>
+                <input class="oc-input" type="tel" name="phone" required placeholder="6XXX-XXXX" />
+              </div>
+            </div>
+
+            <div class="oc-field">
+              <label>Correo electrónico (opcional)</label>
+              <input class="oc-input" type="email" name="email" placeholder="tu@correo.com" />
+            </div>
+
+            <div class="oc-field">
+              <label>Día que te queda mejor</label>
+              <div class="book-pills" id="pillsDay">
+                <span class="book-pill is-active" data-val="Lo antes posible">Lo antes posible</span>
+                <span class="book-pill" data-val="Esta semana">Esta semana</span>
+                <span class="book-pill" data-val="Próxima semana">Próxima semana</span>
+                <span class="book-pill" data-val="Fin de semana">Fin de semana</span>
+              </div>
+              <input type="hidden" name="day" id="dayVal" value="Lo antes posible" />
+            </div>
+
+            <div class="oc-field">
+              <label>¿Algo que quieras contarnos?</label>
+              <textarea class="oc-textarea" name="notes" placeholder="Ej. Ya usé brackets, tengo dolor, mi hijo necesita evaluación, etc."></textarea>
+            </div>
+
+            <button type="submit" class="oc-btn oc-btn-teal oc-btn-lg" style="width: 100%; margin-top: 8px;">
+              Enviar y agendar por WhatsApp
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 14.2c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2.1c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+            </button>
+
+            <p class="book-fine">Al enviar abrimos un chat de WhatsApp con tu sucursal — nunca compartimos tus datos.</p>
+          </form>
+        </div>
+
+        <div class="book-card book-success" id="bookSuccess">
+          <div class="book-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h3>¡Recibimos tu solicitud!</h3>
+          <p>Abrimos WhatsApp en otra pestaña con los datos de tu cita. Si no se abrió, da clic aquí abajo.</p>
+          <a class="oc-btn oc-btn-teal" id="bookWa" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/shared/nav-footer.js?v=1"></script>
+  <script>
+    (function() {
+      const WA = {
+        andes:      '50766734766',
+        coronado:   '50763400028',
+        costaverde: '50767296810'
+      };
+      const BRANCH_LABEL = {
+        andes:      'Los Andes Mall',
+        coronado:   'Coronado',
+        costaverde: 'Costa Verde'
+      };
+
+      function pillGroup(containerId, inputId) {
+        const c = document.getElementById(containerId);
+        const input = document.getElementById(inputId);
+        if (!c) return;
+        c.addEventListener('click', e => {
+          const p = e.target.closest('.book-pill');
+          if (!p) return;
+          c.querySelectorAll('.book-pill').forEach(x => x.classList.remove('is-active'));
+          p.classList.add('is-active');
+          input.value = p.dataset.val;
+        });
+      }
+      pillGroup('pillsBranch', 'branchVal');
+      pillGroup('pillsService', 'serviceVal');
+      pillGroup('pillsDay', 'dayVal');
+
+      const form = document.getElementById('bookForm');
+      const card = document.getElementById('bookCard');
+      const ok = document.getElementById('bookSuccess');
+      const waBtn = document.getElementById('bookWa');
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const branchKey = data.branch || 'andes';
+        const num = WA[branchKey];
+        const label = BRANCH_LABEL[branchKey];
+        const lines = [
+          `Hola OrthoClinic ${label}, quiero agendar mi evaluación.`,
+          ``,
+          `• Nombre: ${data.name || '(sin dato)'}`,
+          `• WhatsApp: ${data.phone || '(sin dato)'}`,
+          data.email ? `• Email: ${data.email}` : null,
+          `• Interés: ${data.service || ''}`,
+          `• Cuándo: ${data.day || ''}`,
+          data.notes ? `• Notas: ${data.notes}` : null,
+          ``,
+          `¡Gracias!`
+        ].filter(Boolean);
+        const msg = encodeURIComponent(lines.join('\n'));
+        const url = `https://wa.me/${num}?text=${msg}`;
+        waBtn.href = url;
+        window.open(url, '_blank', 'noopener');
+
+        card.style.display = 'none';
+        ok.classList.add('is-on');
+        window.scrollTo({ top: ok.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

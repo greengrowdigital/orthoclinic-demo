@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Especialistas — OrthoClinic Panamá</title>
+  <meta name="description" content="Conoce a los Dres. Tomás Tejada y Carlos Núñez, ortodoncistas certificados de OrthoClinic Panamá." />
+  <meta name="theme-color" content="#0E7F8C" />
+  <link rel="icon" href="/public/logo-mark.svg" type="image/svg+xml" />
+  <link href="/shared/theme.css?v=1" rel="stylesheet" />
+  <style>
+    .page-hero {
+      padding: calc(var(--oc-nav-h) + 80px) 24px 80px;
+      background:
+        radial-gradient(60% 50% at 90% 10%, var(--oc-teal-tint) 0%, transparent 60%),
+        var(--oc-bg);
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(50px, 8vw, 120px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin: 24px 0 24px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .page-hero p { color: var(--oc-ink-mute); font-size: 18px; max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    .spec-block {
+      padding: clamp(80px, 10vw, 140px) 24px;
+      border-bottom: 1px solid var(--oc-line);
+    }
+    .spec-block:nth-child(even) { background: var(--oc-bg-soft); }
+    .spec-inner {
+      max-width: var(--oc-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .spec-block:nth-child(even) .spec-inner { grid-template-columns: 7fr 5fr; }
+    .spec-block:nth-child(even) .spec-portrait-wrap { order: 2; }
+
+    .spec-portrait-wrap { position: sticky; top: calc(var(--oc-nav-h) + 24px); }
+    .spec-portrait {
+      aspect-ratio: 3/4;
+      border-radius: var(--oc-radius-xl);
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--oc-teal-soft) 0%, var(--oc-bg-warm) 60%, var(--oc-coral-tint) 100%);
+      box-shadow: var(--oc-shadow-lg);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+    }
+    .spec-portrait::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 50% at 50% 100%, var(--oc-ink) 0%, transparent 70%);
+      opacity: 0.18;
+    }
+    .spec-portrait svg {
+      width: 75%;
+      max-width: 320px;
+      color: rgba(10,26,31,0.45);
+      position: relative;
+      z-index: 1;
+    }
+    .spec-portrait-tag {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      padding: 8px 16px;
+      background: rgba(10,26,31,0.85);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      border-radius: var(--oc-radius-pill);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    .spec-meta { margin-bottom: 18px; display: inline-flex; gap: 14px; align-items: center; }
+    .spec-meta span {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--oc-teal-deep);
+      font-weight: 600;
+    }
+    .spec-meta::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--oc-teal);
+    }
+    .spec-block h2 {
+      font-family: var(--oc-font-display);
+      font-size: clamp(48px, 6vw, 84px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      margin: 0 0 28px;
+    }
+    .spec-block h2 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .spec-block .lede {
+      font-family: var(--oc-font-display);
+      font-size: clamp(20px, 2vw, 24px);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--oc-ink);
+      margin: 0 0 32px;
+      max-width: 540px;
+    }
+    .spec-block p { color: var(--oc-ink-mute); font-size: 16px; line-height: 1.75; margin: 0 0 20px; max-width: 600px; }
+
+    .spec-timeline { display: flex; flex-direction: column; gap: 0; margin: 40px 0; padding: 0; list-style: none; }
+    .spec-timeline li {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--oc-line);
+      align-items: baseline;
+    }
+    .spec-timeline .year {
+      font-family: var(--oc-font-mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--oc-teal-deep);
+      font-weight: 600;
+    }
+    .spec-timeline .what {
+      font-size: 16px;
+      color: var(--oc-ink);
+      font-weight: 500;
+    }
+    .spec-timeline .what em { color: var(--oc-ink-mute); font-style: normal; font-weight: 400; display: block; margin-top: 4px; font-size: 14px; }
+
+    .spec-quote {
+      margin: 40px 0;
+      padding: 28px 32px;
+      background: var(--oc-teal-tint);
+      border-radius: var(--oc-radius-md);
+      border-left: 3px solid var(--oc-teal);
+      font-family: var(--oc-font-display);
+      font-size: 20px;
+      line-height: 1.45;
+      color: var(--oc-ink);
+      letter-spacing: -0.01em;
+    }
+    .spec-quote::before {
+      content: '"';
+      font-size: 48px;
+      line-height: 0;
+      vertical-align: -0.4em;
+      color: var(--oc-teal);
+      margin-right: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .spec-inner, .spec-block:nth-child(even) .spec-inner { grid-template-columns: 1fr; gap: 40px; }
+      .spec-portrait-wrap { position: static; max-width: 460px; margin: 0 auto; }
+      .spec-block:nth-child(even) .spec-portrait-wrap { order: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page-hero">
+    <span class="oc-eyebrow is-center" data-reveal>Equipo · OrthoClinic</span>
+    <h1 data-reveal data-reveal-delay="1">Nuestros <em>especialistas</em>.</h1>
+    <p data-reveal data-reveal-delay="2">Dos ortodoncistas con formación nacional e internacional, práctica limitada a ortodoncia y compromiso con resultados predecibles.</p>
+  </section>
+
+  <section class="spec-block" id="tejada">
+    <div class="spec-inner">
+      <div class="spec-portrait-wrap" data-reveal>
+        <div class="spec-portrait">
+          <span class="spec-portrait-tag">Director clínico</span>
+          <svg viewBox="0 0 200 240" fill="currentColor">
+            <circle cx="100" cy="70" r="42"/>
+            <path d="M30 240 C 30 165, 75 138, 100 138 C 125 138, 170 165, 170 240 Z"/>
+          </svg>
+        </div>
+      </div>
+      <div data-reveal data-reveal-delay="1">
+        <div class="spec-meta"><span>Ortodoncista · Director</span></div>
+        <h2>Dr. Tomás <em>Tejada</em></h2>
+        <p class="lede">Más de dos décadas de práctica limitada a ortodoncia. Profesor universitario, comunicador y referente local en planificación ortodóntica.</p>
+
+        <p>Egresado como Odontólogo General de la Universidad de Panamá en 1997, su carrera ha estado dedicada exclusivamente a la ortodoncia. Combina la rigurosidad académica con un trato cercano: explica cada paso, ofrece opciones y construye el plan con el paciente, no para el paciente.</p>
+
+        <ul class="spec-timeline">
+          <li><span class="year">1997</span><span class="what">Odontólogo General<em>Universidad de Panamá</em></span></li>
+          <li><span class="year">2004</span><span class="what">Especialista en Ortodoncia<em>ULACIT (ahora UIP)</em></span></li>
+          <li><span class="year">2016</span><span class="what">Maestría en Educación Superior<em>Universidad del Istmo (UDI)</em></span></li>
+          <li><span class="year">Hoy</span><span class="what">Profesor de Ortodoncia y Clínica Integral<em>Universidad Latina de Panamá</em></span></li>
+        </ul>
+
+        <div class="spec-quote">El mejor plan ortodóntico es el que el paciente entiende, puede pagar y termina con orgullo. Lo demás es ruido.</div>
+
+        <p>Sus cursos de perfeccionamiento nacional e internacional lo mantienen al día con las técnicas más recientes — desde autoligado pasivo hasta protocolos láser para acelerar el movimiento dental.</p>
+
+        <a class="oc-btn oc-btn-teal" href="/agenda" style="margin-top: 24px;">
+          Agendar con el Dr. Tejada
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-block" id="nunez">
+    <div class="spec-inner">
+      <div data-reveal data-reveal-delay="1">
+        <div class="spec-meta"><span>Ortodoncista</span></div>
+        <h2>Dr. Carlos <em>Núñez</em></h2>
+        <p class="lede">Especialista con práctica limitada a ortodoncia. Reconocido por su precisión clínica, su trato cálido y un enfoque profundamente humano.</p>
+
+        <p>Odontólogo General egresado de la Universidad de Panamá en 1997, especialista en Ortodoncia por ULACIT/UIP en 2004. Su consulta se distingue por la atención individualizada: cada paciente tiene tiempo, espacio y respuestas claras a sus dudas.</p>
+
+        <ul class="spec-timeline">
+          <li><span class="year">1997</span><span class="what">Odontólogo General<em>Universidad de Panamá</em></span></li>
+          <li><span class="year">2004</span><span class="what">Especialista en Ortodoncia<em>ULACIT (ahora UIP)</em></span></li>
+          <li><span class="year">∞</span><span class="what">Cursos de entrenamiento continuo<em>Nacionales e internacionales</em></span></li>
+        </ul>
+
+        <div class="spec-quote">No tratamos dientes, tratamos personas. La ortodoncia que respeta eso es la ortodoncia que dura toda la vida.</div>
+
+        <p>Su trabajo se enfoca en construir relaciones de confianza con los pacientes — desde el niño que llega con miedo a su primera evaluación, hasta el adulto que finalmente decide arreglar lo que llevaba años postergando.</p>
+
+        <a class="oc-btn oc-btn-teal" href="/agenda" style="margin-top: 24px;">
+          Agendar con el Dr. Núñez
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="spec-portrait-wrap" data-reveal>
+        <div class="spec-portrait">
+          <span class="spec-portrait-tag">Ortodoncista</span>
+          <svg viewBox="0 0 200 240" fill="currentColor">
+            <circle cx="100" cy="70" r="42"/>
+            <path d="M30 240 C 30 165, 75 138, 100 138 C 125 138, 170 165, 170 240 Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="oc-section" style="background: var(--oc-ink); color: #fff; text-align: center; padding: clamp(80px, 10vw, 140px) 24px; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(14,160,174,0.30) 0%, transparent 65%); pointer-events: none;"></div>
+    <div class="oc-container" style="position: relative;">
+      <span class="oc-eyebrow is-center is-light" data-reveal>Reserva tu evaluación</span>
+      <h2 class="oc-display" style="font-size: clamp(40px, 6vw, 80px); color: #fff; margin: 24px 0 24px;" data-reveal data-reveal-delay="1">
+        Conversemos sobre <em>tu</em> sonrisa.
+      </h2>
+      <p style="color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px;" data-reveal data-reveal-delay="2">Una evaluación inicial con cualquiera de nuestros especialistas. Sin compromisos, con un plan a tu medida.</p>
+      <div style="display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center;" data-reveal data-reveal-delay="3">
+        <a class="oc-btn oc-btn-teal oc-btn-lg" href="/agenda">Agendar evaluación <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="oc-btn oc-btn-ghost oc-btn-lg" href="/servicios">Ver servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="/shared/nav-footer.js?v=1"></script>
+</body>
+</html>
