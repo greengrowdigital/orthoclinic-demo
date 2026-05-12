@@ -91,24 +91,41 @@
         linear-gradient(160deg, var(--oc-teal-soft) 0%, var(--oc-bg-warm) 40%, var(--oc-coral-tint) 100%);
       box-shadow: var(--oc-shadow-lg);
     }
+    .hero-photo-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 55%;
+      display: block;
+    }
     .hero-photo::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,0.45) 0%, transparent 70%);
-      mix-blend-mode: overlay;
+        linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(10,26,31,0.18) 100%),
+        radial-gradient(60% 40% at 50% 25%, rgba(255,255,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
-    /* "Smile" SVG */
-    .hero-smile {
+    .hero-photo-sparkle {
       position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 8%;
+      right: 8%;
       z-index: 2;
+      animation: float 5.5s var(--oc-ease) infinite alternate;
+      filter: drop-shadow(0 4px 12px rgba(21,160,174,0.4));
     }
-    .hero-smile svg { width: 78%; height: auto; opacity: 0.92; }
+    .hero-photo-sparkle-2 {
+      top: auto;
+      bottom: 26%;
+      left: 10%;
+      right: auto;
+      animation-delay: 1.2s;
+      filter: drop-shadow(0 3px 8px rgba(164,216,174,0.4));
+    }
 
     .hero-card-rating {
       position: absolute;
@@ -722,42 +739,15 @@
 
       <div class="hero-visual" data-reveal data-reveal-delay="2">
         <div class="hero-photo">
-          <div class="hero-smile">
-            <!-- Smile illustration -->
-            <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" fill="none">
-              <defs>
-                <linearGradient id="lip-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#E07B5F"/>
-                  <stop offset="1" stop-color="#B85B40"/>
-                </linearGradient>
-                <linearGradient id="tooth-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#FFFFFF"/>
-                  <stop offset="1" stop-color="#E5F2F4"/>
-                </linearGradient>
-              </defs>
-              <!-- Lips -->
-              <path d="M40 160 Q200 60, 360 160 Q200 280, 40 160 Z" fill="url(#lip-grad)"/>
-              <!-- Mouth opening -->
-              <path d="M70 160 Q200 100, 330 160 Q200 220, 70 160 Z" fill="#3a1810"/>
-              <!-- Teeth -->
-              <g fill="url(#tooth-grad)">
-                <rect x="100" y="135" width="22" height="38" rx="4"/>
-                <rect x="128" y="128" width="26" height="44" rx="4"/>
-                <rect x="160" y="124" width="28" height="48" rx="4"/>
-                <rect x="194" y="124" width="28" height="48" rx="4"/>
-                <rect x="228" y="128" width="26" height="44" rx="4"/>
-                <rect x="260" y="135" width="22" height="38" rx="4"/>
-              </g>
-              <!-- Highlight on tooth -->
-              <rect x="166" y="130" width="6" height="20" rx="3" fill="#fff" opacity="0.8"/>
-              <rect x="200" y="130" width="6" height="20" rx="3" fill="#fff" opacity="0.8"/>
-              <!-- Sparkle -->
-              <g transform="translate(310,80)">
-                <path d="M0 -16 L4 -4 L16 0 L4 4 L0 16 L-4 4 L-16 0 L-4 -4 Z" fill="#15A0AE"/>
-              </g>
-              <g transform="translate(70,80)">
-                <path d="M0 -10 L3 -3 L10 0 L3 3 L0 10 L-3 3 L-10 0 L-3 -3 Z" fill="#A4D8AE"/>
-              </g>
+          <img class="hero-photo-img" src="/public/smile-after.jpg" alt="Paciente sonriendo después del tratamiento ortodóntico en OrthoClinic" fetchpriority="high" decoding="async" />
+          <div class="hero-photo-sparkle">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M24 4 L28 20 L44 24 L28 28 L24 44 L20 28 L4 24 L20 20 Z" fill="#15A0AE"/>
+            </svg>
+          </div>
+          <div class="hero-photo-sparkle hero-photo-sparkle-2">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 2 L16 12 L26 14 L16 16 L14 26 L12 16 L2 14 L12 12 Z" fill="#A4D8AE"/>
             </svg>
           </div>
         </div>
