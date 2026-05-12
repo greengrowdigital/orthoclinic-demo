@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bgA" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#fde8e0"/>
+      <stop offset="60%" stop-color="#f4ccbe"/>
+      <stop offset="100%" stop-color="#cc9a8a"/>
+    </radialGradient>
+    <linearGradient id="skinA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#edb8a0"/>
+      <stop offset="100%" stop-color="#cd866a"/>
+    </linearGradient>
+    <linearGradient id="upperLipA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b04848"/>
+      <stop offset="100%" stop-color="#822e2e"/>
+    </linearGradient>
+    <linearGradient id="lowerLipA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c25454"/>
+      <stop offset="100%" stop-color="#8a3636"/>
+    </linearGradient>
+    <linearGradient id="mouthDarkA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a1818"/>
+      <stop offset="100%" stop-color="#1a0808"/>
+    </linearGradient>
+    <linearGradient id="gumA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e088a0"/>
+      <stop offset="100%" stop-color="#b85878"/>
+    </linearGradient>
+    <linearGradient id="toothA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#dde6ec"/>
+    </linearGradient>
+    <linearGradient id="toothAside" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <radialGradient id="lipHighlightA" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="toothShine" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadowA" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="grainA">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.07 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+
+  <!-- Background skin tone -->
+  <rect width="1200" height="800" fill="url(#bgA)"/>
+  <ellipse cx="600" cy="400" rx="800" ry="500" fill="url(#skinA)" opacity="0.6"/>
+
+  <!-- Soft skin tone above/below -->
+  <ellipse cx="600" cy="200" rx="900" ry="200" fill="#dc9a82" opacity="0.45"/>
+  <ellipse cx="600" cy="700" rx="900" ry="220" fill="#b06c52" opacity="0.5"/>
+
+  <!-- Mouth dark cavity (wider, more open confident smile) -->
+  <path d="M 250 365 Q 600 460 950 365 Q 950 490 600 525 Q 250 490 250 365 Z" fill="url(#mouthDarkA)"/>
+
+  <!-- Upper gum - healthy pink -->
+  <path d="M 300 365 Q 600 395 900 365 Q 900 415 600 432 Q 300 415 300 365 Z" fill="url(#gumA)"/>
+  <path d="M 300 365 Q 600 390 900 365" fill="none" stroke="#a05060" stroke-width="2" opacity="0.5"/>
+
+  <!-- PERFECT TEETH - aligned, white, even spacing -->
+  <!-- All same y-baseline, even widths, no gaps -->
+
+  <!-- Tooth 1 -->
+  <path d="M 320 385 L 380 383 Q 388 383 388 393 L 384 478 Q 380 488 370 488 L 332 487 Q 322 486 320 476 Z" fill="url(#toothAside)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="354" cy="410" rx="12" ry="16" fill="url(#toothShine)" opacity="0.5"/>
+
+  <!-- Tooth 2 -->
+  <path d="M 392 383 L 460 381 Q 470 381 470 392 L 466 488 Q 462 498 452 498 L 404 496 Q 394 495 392 485 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="430" cy="410" rx="16" ry="22" fill="url(#toothShine)" opacity="0.6"/>
+
+  <!-- Tooth 3 -->
+  <path d="M 474 381 L 542 380 Q 552 380 552 391 L 548 500 Q 544 510 534 510 L 486 508 Q 476 507 474 497 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="512" cy="412" rx="18" ry="26" fill="url(#toothShine)" opacity="0.65"/>
+
+  <!-- Tooth 4 - front -->
+  <path d="M 556 380 L 596 379 Q 600 379 600 391 L 600 514 Q 600 525 592 525 L 568 524 Q 558 523 556 513 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.7"/>
+  <ellipse cx="580" cy="414" rx="14" ry="30" fill="url(#toothShine)" opacity="0.7"/>
+
+  <!-- Tooth 5 - front -->
+  <path d="M 604 379 L 644 380 Q 648 380 648 391 L 644 524 Q 644 525 638 525 L 612 525 Q 604 525 604 514 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.7"/>
+  <ellipse cx="624" cy="414" rx="14" ry="30" fill="url(#toothShine)" opacity="0.7"/>
+
+  <!-- Tooth 6 -->
+  <path d="M 658 380 L 726 381 Q 736 381 734 392 L 726 510 Q 722 510 712 510 L 668 508 Q 658 507 656 497 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="692" cy="412" rx="18" ry="26" fill="url(#toothShine)" opacity="0.65"/>
+
+  <!-- Tooth 7 -->
+  <path d="M 740 381 L 808 383 Q 818 383 816 393 L 808 498 Q 804 498 796 498 L 752 496 Q 742 495 740 485 Z" fill="url(#toothA)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="774" cy="410" rx="16" ry="22" fill="url(#toothShine)" opacity="0.6"/>
+
+  <!-- Tooth 8 -->
+  <path d="M 820 385 L 880 387 Q 888 387 888 397 L 884 478 Q 880 488 870 488 L 832 487 Q 822 486 820 476 Z" fill="url(#toothAside)" stroke="#94a8b8" stroke-width="0.6"/>
+  <ellipse cx="854" cy="410" rx="12" ry="16" fill="url(#toothShine)" opacity="0.5"/>
+
+  <!-- subtle tooth separators (vertical lines) -->
+  <g stroke="#b8c8d4" stroke-width="0.8" opacity="0.4">
+    <line x1="390" y1="395" x2="390" y2="495"/>
+    <line x1="472" y1="393" x2="472" y2="505"/>
+    <line x1="554" y1="392" x2="554" y2="515"/>
+    <line x1="600" y1="392" x2="600" y2="520"/>
+    <line x1="656" y1="392" x2="656" y2="510"/>
+    <line x1="738" y1="393" x2="738" y2="495"/>
+    <line x1="818" y1="395" x2="818" y2="488"/>
+  </g>
+
+  <!-- Lower teeth hint - also white -->
+  <path d="M 340 515 Q 600 538 860 515 Q 860 548 600 552 Q 340 548 340 515 Z" fill="#f0f6fa" opacity="0.85"/>
+  <g stroke="#b8c8d4" stroke-width="0.6" opacity="0.5">
+    <line x1="430" y1="525" x2="430" y2="546"/>
+    <line x1="500" y1="528" x2="500" y2="549"/>
+    <line x1="570" y1="530" x2="570" y2="551"/>
+    <line x1="630" y1="530" x2="630" y2="551"/>
+    <line x1="700" y1="528" x2="700" y2="549"/>
+    <line x1="770" y1="525" x2="770" y2="546"/>
+  </g>
+
+  <!-- UPPER LIP -->
+  <path d="M 200 325 Q 340 250 600 270 Q 860 250 1000 325 Q 940 350 900 365 Q 720 350 600 350 Q 480 350 300 365 Q 260 350 200 325 Z" fill="url(#upperLipA)"/>
+  <!-- Cupid's bow -->
+  <path d="M 530 285 L 583 315 L 600 280 L 617 315 L 670 285" fill="none" stroke="#5a1c1c" stroke-width="2" opacity="0.55"/>
+  <ellipse cx="600" cy="312" rx="200" ry="14" fill="url(#lipHighlightA)"/>
+
+  <!-- LOWER LIP - fuller for confident smile -->
+  <path d="M 220 525 Q 350 605 600 645 Q 850 605 980 525 Q 940 510 900 502 Q 720 545 600 555 Q 480 545 300 502 Q 260 510 220 525 Z" fill="url(#lowerLipA)"/>
+  <ellipse cx="600" cy="580" rx="240" ry="22" fill="url(#lipHighlightA)" opacity="0.75"/>
+
+  <!-- Mouth corner shadows softer (smiling) -->
+  <ellipse cx="210" cy="420" rx="35" ry="35" fill="#5a2828" opacity="0.3" filter="url(#softShadowA)"/>
+  <ellipse cx="990" cy="420" rx="35" ry="35" fill="#5a2828" opacity="0.3" filter="url(#softShadowA)"/>
+
+  <!-- Soft sparkle highlight on one tooth -->
+  <g opacity="0.95">
+    <circle cx="600" cy="402" r="3" fill="#fff"/>
+    <path d="M 600 396 L 602 402 L 608 404 L 602 406 L 600 412 L 598 406 L 592 404 L 598 402 Z" fill="#fff" opacity="0.85"/>
+  </g>
+
+  <!-- Subtle film grain -->
+  <rect width="1200" height="800" fill="#000" opacity="0.035" filter="url(#grainA)"/>
+
+  <!-- Vignette -->
+  <radialGradient id="vigA" cx="50%" cy="50%" r="75%">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.3"/>
+  </radialGradient>
+  <rect width="1200" height="800" fill="url(#vigA)"/>
+
+</svg>
