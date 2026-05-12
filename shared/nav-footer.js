@@ -173,14 +173,17 @@
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         const el = e.target;
-        const target = parseFloat(el.dataset.count);
+        const raw = el.dataset.count;
+        const target = parseFloat(raw);
+        const hasDecimal = /\./.test(raw);
         const suffix = el.dataset.suffix || '';
         const dur = 1600;
         const start = performance.now();
         function tick(now) {
           const t = Math.min(1, (now - start) / dur);
           const eased = 1 - Math.pow(1 - t, 3);
-          const val = target < 10 ? (target * eased).toFixed(1) : Math.round(target * eased);
+          const v = target * eased;
+          const val = hasDecimal ? v.toFixed(1) : Math.round(v);
           el.textContent = val + suffix;
           if (t < 1) requestAnimationFrame(tick);
         }
@@ -209,51 +212,6 @@
     toggle.addEventListener('click', open);
     close?.addEventListener('click', shut);
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
-  }
-
-  function setupCursor() {
-    if (matchMedia('(pointer: coarse)').matches) return;
-    const dot = document.createElement('div');
-    dot.className = 'oc-cursor';
-    dot.style.cssText = `
-      position: fixed; top:0; left:0; width: 8px; height: 8px;
-      background: var(--oc-teal); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform .25s var(--oc-ease), opacity .25s, background .25s;
-      mix-blend-mode: multiply;
-      opacity: 0;
-    `;
-    const ring = document.createElement('div');
-    ring.className = 'oc-cursor-ring';
-    ring.style.cssText = `
-      position: fixed; top:0; left:0; width: 40px; height: 40px;
-      border: 1px solid var(--oc-teal); border-radius: 50%;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform .4s var(--oc-ease), opacity .25s, width .25s, height .25s, border-color .25s;
-      opacity: 0;
-    `;
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    let x = 0, y = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => {
-      x = e.clientX; y = e.clientY;
-      dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-      dot.style.opacity = '1';
-      ring.style.opacity = '0.7';
-    });
-    function loop() {
-      rx += (x - rx) * 0.18;
-      ry += (y - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      requestAnimationFrame(loop);
-    }
-    loop();
-    document.querySelectorAll('a, button, .oc-card, [data-cursor-grow]').forEach(el => {
-      el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; ring.style.borderColor = 'var(--oc-teal-bright)'; });
-      el.addEventListener('mouseleave', () => { ring.style.width = '40px'; ring.style.height = '40px'; ring.style.borderColor = 'var(--oc-teal)'; });
-    });
   }
 
   function injectGoogleFonts() {
@@ -289,7 +247,6 @@
     setupDrawer();
     setupReveal();
     setupCounters();
-    setupCursor();
   }
 
   if (document.readyState === 'loading') {

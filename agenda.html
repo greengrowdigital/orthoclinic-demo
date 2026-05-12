@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Agenda tu evaluación — OrthoClinic Panamá</title>
-  <meta name="description" content="Agenda tu evaluación ortodóntica en OrthoClinic. 3 sucursales en Panamá. Respondemos en menos de 30 minutos." />
+  <title>Agenda tu cita — OrthoClinic Panamá</title>
+  <meta name="description" content="Agenda en línea tu evaluación con un especialista de OrthoClinic. Elige sucursal, día y hora — confirmación inmediata." />
   <meta name="theme-color" content="#0E7F8C" />
   <link rel="icon" href="/public/logo-mark.svg" type="image/svg+xml" />
   <link href="/shared/theme.css?v=1" rel="stylesheet" />
@@ -21,7 +21,7 @@
       margin: 0 auto;
       padding: 40px 24px 100px;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
+      grid-template-columns: 1fr 1.15fr;
       gap: 80px;
       align-items: start;
     }
@@ -43,12 +43,12 @@
       margin: 0 0 36px;
     }
 
-    .book-benefits { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+    .book-benefits { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
     .book-benefit {
       display: flex;
       gap: 16px;
       align-items: flex-start;
-      padding: 18px 20px;
+      padding: 16px 18px;
       background: rgba(255,255,255,0.6);
       border: 1px solid var(--oc-line);
       border-radius: var(--oc-radius-md);
@@ -68,11 +68,10 @@
     .book-benefit h4 { margin: 0 0 4px; font-size: 15px; font-weight: 600; color: var(--oc-ink); }
     .book-benefit p { margin: 0; color: var(--oc-ink-mute); font-size: 13.5px; line-height: 1.5; }
 
-    /* Card form */
+    /* ========== WIZARD CARD ========== */
     .book-card {
       background: var(--oc-surface);
       border-radius: var(--oc-radius-xl);
-      padding: 48px;
       box-shadow: var(--oc-shadow-lg);
       border: 1px solid var(--oc-line);
       position: relative;
@@ -84,21 +83,63 @@
       top: 0; left: 0; right: 0;
       height: 5px;
       background: linear-gradient(90deg, var(--oc-teal), var(--oc-teal-bright), var(--oc-mint));
+      z-index: 3;
     }
-    .book-step {
+
+    /* Progress bar */
+    .wiz-progress {
+      display: flex;
+      padding: 28px 40px 20px;
+      gap: 10px;
+      border-bottom: 1px solid var(--oc-line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+    }
+    .wiz-step-dot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wiz-step-dot .bar {
+      height: 4px;
+      border-radius: 4px;
+      background: var(--oc-line-strong);
+      transition: background .35s var(--oc-ease);
+    }
+    .wiz-step-dot .lbl {
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--oc-ink-soft);
+      transition: color .25s var(--oc-ease);
+    }
+    .wiz-step-dot.is-done .bar { background: var(--oc-teal-bright); }
+    .wiz-step-dot.is-done .lbl { color: var(--oc-teal-deep); }
+    .wiz-step-dot.is-active .bar { background: var(--oc-ink); }
+    .wiz-step-dot.is-active .lbl { color: var(--oc-ink); }
+
+    /* Step body */
+    .wiz-body { padding: 36px 40px 32px; }
+    .wiz-step { display: none; animation: stepFade .35s var(--oc-ease); }
+    .wiz-step.is-active { display: block; }
+    @keyframes stepFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .wiz-step .eyebrow {
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--oc-teal-deep);
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: inline-flex;
       align-items: center;
       gap: 10px;
     }
-    .book-step .step-num {
-      width: 22px;
-      height: 22px;
+    .wiz-step .eyebrow .num {
+      width: 22px; height: 22px;
       background: var(--oc-teal-tint);
       color: var(--oc-teal-deep);
       border-radius: 50%;
@@ -107,56 +148,377 @@
       justify-content: center;
       font-size: 11px;
     }
-    .book-card h2 {
+    .wiz-step h2 {
       font-family: var(--oc-font-display);
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 400;
       letter-spacing: -0.02em;
       line-height: 1.1;
-      margin: 0 0 32px;
+      margin: 0 0 6px;
+    }
+    .wiz-step .sub {
+      color: var(--oc-ink-mute);
+      font-size: 14.5px;
+      line-height: 1.55;
+      margin: 0 0 28px;
     }
 
-    .book-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .book-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
-    .book-pill {
-      padding: 12px 18px;
-      border: 1px solid var(--oc-line-strong);
-      border-radius: var(--oc-radius-pill);
+    /* Choice cards (branches + services) */
+    .wiz-choices {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .wiz-choice {
+      position: relative;
+      padding: 14px 16px;
+      border: 1.5px solid var(--oc-line-strong);
+      border-radius: var(--oc-radius-md);
       background: var(--oc-surface);
       cursor: pointer;
-      font-family: var(--oc-font-body);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--oc-ink);
       transition: all .25s var(--oc-ease);
-      user-select: none;
+      text-align: left;
     }
-    .book-pill:hover { border-color: var(--oc-teal); color: var(--oc-teal-deep); }
-    .book-pill.is-active {
+    .wiz-choice:hover { border-color: var(--oc-teal); transform: translateY(-2px); box-shadow: var(--oc-shadow-sm); }
+    .wiz-choice.is-active {
+      border-color: var(--oc-ink);
       background: var(--oc-ink);
       color: #fff;
-      border-color: var(--oc-ink);
+      transform: translateY(-2px);
+      box-shadow: var(--oc-shadow-md);
+    }
+    .wiz-choice .ttl { font-size: 14px; font-weight: 600; line-height: 1.25; display: block; margin-bottom: 4px; }
+    .wiz-choice .meta { font-size: 11.5px; color: var(--oc-ink-mute); display: block; }
+    .wiz-choice.is-active .meta { color: rgba(255,255,255,0.7); }
+    .wiz-choice .badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      background: var(--oc-coral-tint);
+      color: var(--oc-coral-deep);
+      border-radius: var(--oc-radius-pill);
+      font-weight: 700;
+    }
+    .wiz-choice.is-active .badge { background: rgba(255,255,255,0.18); color: #fff; }
+
+    /* Section title in step */
+    .wiz-section-ttl {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--oc-ink-soft);
+      font-weight: 700;
+      margin: 28px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wiz-section-ttl::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--oc-line);
     }
 
-    .book-fine {
+    /* Calendar */
+    .wiz-cal {
+      background: var(--oc-bg-soft);
+      border: 1px solid var(--oc-line);
+      border-radius: var(--oc-radius-lg);
+      padding: 20px;
+    }
+    .wiz-cal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .wiz-cal-head h4 {
+      font-family: var(--oc-font-display);
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0;
+      text-transform: capitalize;
+    }
+    .wiz-cal-nav {
+      display: flex; gap: 6px;
+    }
+    .wiz-cal-nav button {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--oc-line-strong);
+      background: var(--oc-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--oc-ink);
+      transition: all .2s var(--oc-ease);
+    }
+    .wiz-cal-nav button:hover:not(:disabled) { border-color: var(--oc-teal); color: var(--oc-teal-deep); }
+    .wiz-cal-nav button:disabled { opacity: 0.35; cursor: not-allowed; }
+    .wiz-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .wiz-cal-dow {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--oc-ink-soft);
+      font-weight: 700;
+      padding: 6px 0;
+    }
+    .wiz-cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--oc-radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all .15s var(--oc-ease);
+      position: relative;
+    }
+    .wiz-cal-day:hover:not(.is-empty):not(.is-disabled) {
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+    }
+    .wiz-cal-day.is-empty { visibility: hidden; cursor: default; }
+    .wiz-cal-day.is-disabled { color: var(--oc-ink-soft); opacity: 0.4; cursor: not-allowed; }
+    .wiz-cal-day.is-today { font-weight: 700; }
+    .wiz-cal-day.is-today::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--oc-teal);
+    }
+    .wiz-cal-day.is-selected {
+      background: var(--oc-ink);
+      color: #fff;
+    }
+    .wiz-cal-day.is-selected::after { background: var(--oc-teal-bright); }
+
+    /* Time slots */
+    .wiz-slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .wiz-slot {
+      padding: 12px 6px;
+      border: 1.5px solid var(--oc-line-strong);
+      border-radius: var(--oc-radius-sm);
+      background: var(--oc-surface);
+      cursor: pointer;
+      font-family: var(--oc-font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--oc-ink);
+      transition: all .2s var(--oc-ease);
+      text-align: center;
+    }
+    .wiz-slot:hover:not(.is-disabled) { border-color: var(--oc-teal); color: var(--oc-teal-deep); }
+    .wiz-slot.is-disabled {
+      color: var(--oc-ink-soft);
+      opacity: 0.4;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+    .wiz-slot.is-selected {
+      background: var(--oc-ink);
+      border-color: var(--oc-ink);
+      color: #fff;
+    }
+    .wiz-slot-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 20px;
+      color: var(--oc-ink-soft);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* Payment options */
+    .wiz-pay-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wiz-pay {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1.5px solid var(--oc-line-strong);
+      border-radius: var(--oc-radius-md);
+      background: var(--oc-surface);
+      cursor: pointer;
+      transition: all .25s var(--oc-ease);
+    }
+    .wiz-pay:hover { border-color: var(--oc-teal); }
+    .wiz-pay.is-active {
+      border-color: var(--oc-ink);
+      box-shadow: 0 0 0 3px rgba(10,26,31,0.06);
+    }
+    .wiz-pay .icon {
+      width: 44px; height: 44px;
+      border-radius: var(--oc-radius-sm);
+      background: var(--oc-teal-tint);
+      color: var(--oc-teal-deep);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .wiz-pay .body { flex: 1; }
+    .wiz-pay .body h5 { margin: 0; font-size: 15px; font-weight: 600; color: var(--oc-ink); }
+    .wiz-pay .body p { margin: 3px 0 0; font-size: 12.5px; color: var(--oc-ink-mute); line-height: 1.45; }
+    .wiz-pay .price {
+      font-family: var(--oc-font-mono);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--oc-ink);
+    }
+    .wiz-pay .price small { font-weight: 500; font-size: 11px; color: var(--oc-ink-soft); display: block; }
+
+    /* Card form (mock) */
+    .wiz-card-mock {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: var(--oc-radius-md);
+      background: linear-gradient(135deg, var(--oc-ink) 0%, var(--oc-teal-deep) 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .wiz-card-mock::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+    }
+    .wiz-card-mock .label {
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wiz-card-mock .label .mock-pill {
+      padding: 2px 8px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
+      letter-spacing: 0.14em;
+    }
+    .wiz-card-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .wiz-card-row.two { grid-template-columns: 1fr 1fr; }
+    .wiz-card-mock input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--oc-radius-sm);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-family: var(--oc-font-mono);
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      transition: border-color .2s;
+    }
+    .wiz-card-mock input::placeholder { color: rgba(255,255,255,0.4); }
+    .wiz-card-mock input:focus { outline: none; border-color: var(--oc-teal-bright); }
+
+    /* Summary panel */
+    .wiz-summary {
+      background: var(--oc-bg-soft);
+      border: 1px solid var(--oc-line);
+      border-radius: var(--oc-radius-lg);
+      padding: 18px 20px;
+      margin-top: 18px;
+    }
+    .wiz-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .wiz-summary-row + .wiz-summary-row { border-top: 1px dashed var(--oc-line); }
+    .wiz-summary-row .k {
+      color: var(--oc-ink-soft);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .wiz-summary-row .v {
+      color: var(--oc-ink);
+      font-weight: 500;
+      text-align: right;
+    }
+    .wiz-summary-row.total {
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 2px solid var(--oc-ink);
+    }
+    .wiz-summary-row.total .v {
+      font-family: var(--oc-font-mono);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    /* Form fields */
+    .wiz-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* Footer nav */
+    .wiz-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px;
+      border-top: 1px solid var(--oc-line);
+      background: rgba(255,255,255,0.4);
+      gap: 14px;
+    }
+    .wiz-foot .step-text {
       font-size: 12px;
       color: var(--oc-ink-soft);
-      margin-top: 18px;
-      text-align: center;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.1em;
     }
+    .wiz-foot .actions { display: flex; gap: 10px; }
 
     /* Success */
-    .book-success {
+    .wiz-done {
       display: none;
       text-align: center;
-      padding: 40px 20px;
+      padding: 56px 40px;
     }
-    .book-success.is-on { display: block; }
-    .book-success-icon {
-      width: 72px;
-      height: 72px;
+    .wiz-done.is-on { display: block; animation: stepFade .5s var(--oc-ease); }
+    .wiz-done-icon {
+      width: 88px;
+      height: 88px;
       background: var(--oc-teal-tint);
       color: var(--oc-teal-deep);
       border-radius: 50%;
@@ -164,32 +526,72 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 24px;
-      animation: pop .6s var(--oc-ease-spring);
+      animation: pop .7s var(--oc-ease-spring);
     }
     @keyframes pop {
-      0% { transform: scale(0); }
+      0%   { transform: scale(0); opacity: 0; }
+      60%  { transform: scale(1.15); opacity: 1; }
       100% { transform: scale(1); }
     }
-    .book-success h3 {
+    .wiz-done h3 {
       font-family: var(--oc-font-display);
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 400;
       letter-spacing: -0.02em;
-      margin: 0 0 12px;
+      margin: 0 0 8px;
     }
-    .book-success p {
+    .wiz-done h3 em { font-style: italic; color: var(--oc-teal); font-weight: 300; }
+    .wiz-done .lede {
       color: var(--oc-ink-mute);
-      font-size: 15px;
+      font-size: 15.5px;
       line-height: 1.6;
-      max-width: 380px;
+      max-width: 460px;
+      margin: 0 auto 24px;
+    }
+    .wiz-done-code {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 18px 32px;
+      background: var(--oc-ink);
+      color: #fff;
+      border-radius: var(--oc-radius-md);
+      margin: 0 0 30px;
+    }
+    .wiz-done-code .lbl {
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      font-weight: 700;
+    }
+    .wiz-done-code .code {
+      font-family: var(--oc-font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+    .wiz-done-details {
+      max-width: 480px;
       margin: 0 auto 28px;
+      text-align: left;
+    }
+    .wiz-done-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     @media (max-width: 980px) {
       .book-inner { grid-template-columns: 1fr; gap: 40px; }
       .book-left { position: static; }
-      .book-card { padding: 32px 28px; }
-      .book-row { grid-template-columns: 1fr; }
+      .wiz-progress { padding: 22px 24px 16px; }
+      .wiz-body { padding: 28px 24px 24px; }
+      .wiz-foot { padding: 18px 24px; }
+      .wiz-grid-2 { grid-template-columns: 1fr; }
+      .wiz-step h2 { font-size: 24px; }
+      .wiz-step-dot .lbl { display: none; }
     }
   </style>
 </head>
@@ -198,30 +600,30 @@
   <section class="book-page">
     <div class="book-inner">
       <div class="book-left">
-        <span class="oc-eyebrow" data-reveal>Agenda · Sin compromiso</span>
-        <h1 data-reveal data-reveal-delay="1">Tu evaluación <em>profesional</em>, en 3 pasos.</h1>
-        <p class="lede" data-reveal data-reveal-delay="2">Cuéntanos qué te interesa y a qué sucursal te queda mejor ir. Te confirmamos cita por WhatsApp en menos de 30 minutos en horario hábil.</p>
+        <span class="oc-eyebrow" data-reveal>Agenda en línea · Confirmación inmediata</span>
+        <h1 data-reveal data-reveal-delay="1">Reserva tu cita en <em>menos de un minuto</em>.</h1>
+        <p class="lede" data-reveal data-reveal-delay="2">Elige sucursal, día y hora — sin llamadas, sin esperas. Recibirás un código de confirmación al instante y un recordatorio el día previo.</p>
 
         <div class="book-benefits" data-reveal data-reveal-delay="3">
           <div class="book-benefit">
             <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
             <div>
               <h4>Evaluación con especialista</h4>
-              <p>Te ve un ortodoncista certificado, no un asistente.</p>
+              <p>Te atiende un ortodoncista certificado, no un asistente.</p>
             </div>
           </div>
           <div class="book-benefit">
             <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
             <div>
-              <h4>Plan honesto y claro</h4>
+              <h4>Plan claro y honesto</h4>
               <p>Te explicamos opciones, tiempos y costos — sin letra chica.</p>
             </div>
           </div>
           <div class="book-benefit">
             <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
             <div>
-              <h4>Sin abono inicial</h4>
-              <p>Promoción vigente en brackets metálicos.</p>
+              <h4>Cancela o reagenda gratis</h4>
+              <p>Hasta 4 horas antes — sin costo, sin preguntas.</p>
             </div>
           </div>
         </div>
@@ -229,82 +631,274 @@
 
       <div data-reveal data-reveal-delay="1">
         <div class="book-card" id="bookCard">
-          <span class="book-step"><span class="step-num">1</span> Agenda tu cita</span>
-          <h2>Datos para coordinar tu evaluación</h2>
+          <!-- Progress -->
+          <div class="wiz-progress" id="wizProgress">
+            <div class="wiz-step-dot is-active" data-step="1"><span class="bar"></span><span class="lbl">Servicio</span></div>
+            <div class="wiz-step-dot" data-step="2"><span class="bar"></span><span class="lbl">Fecha y hora</span></div>
+            <div class="wiz-step-dot" data-step="3"><span class="bar"></span><span class="lbl">Tus datos</span></div>
+            <div class="wiz-step-dot" data-step="4"><span class="bar"></span><span class="lbl">Confirmar</span></div>
+          </div>
 
-          <form id="bookForm">
-            <div class="oc-field">
-              <label>Sucursal preferida</label>
-              <div class="book-pills" id="pillsBranch">
-                <span class="book-pill is-active" data-val="andes">Los Andes Mall</span>
-                <span class="book-pill" data-val="coronado">Coronado</span>
-                <span class="book-pill" data-val="costaverde">Costa Verde</span>
+          <div class="wiz-body">
+            <!-- ========== STEP 1 ========== -->
+            <section class="wiz-step is-active" data-step="1">
+              <span class="eyebrow"><span class="num">1</span> Empezamos</span>
+              <h2>¿Qué necesitas y dónde te queda mejor?</h2>
+              <p class="sub">Elige una sucursal y el servicio principal que te interesa. Si no estás seguro, marca evaluación general.</p>
+
+              <div class="wiz-section-ttl">Sucursal</div>
+              <div class="wiz-choices" id="chBranch">
+                <button type="button" class="wiz-choice is-active" data-val="andes">
+                  <span class="ttl">Los Andes Mall</span>
+                  <span class="meta">San Miguelito · 392-6698</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="coronado">
+                  <span class="ttl">The Village Coronado</span>
+                  <span class="meta">Coronado · 345-3315</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="costaverde">
+                  <span class="ttl">Costa Verde</span>
+                  <span class="meta">Arraiján · 6729-6810</span>
+                </button>
               </div>
-              <input type="hidden" name="branch" id="branchVal" value="andes" />
-            </div>
 
-            <div class="oc-field">
-              <label>¿Qué te interesa?</label>
-              <div class="book-pills" id="pillsService">
-                <span class="book-pill is-active" data-val="Brackets / ortodoncia">Brackets / ortodoncia</span>
-                <span class="book-pill" data-val="Ortodoncia invisible">Ortodoncia invisible</span>
-                <span class="book-pill" data-val="Blanqueamiento">Blanqueamiento</span>
-                <span class="book-pill" data-val="Limpieza">Limpieza</span>
-                <span class="book-pill" data-val="Láser">Láser</span>
-                <span class="book-pill" data-val="Endodoncia / cirugía">Endodoncia / cirugía</span>
-                <span class="book-pill" data-val="No estoy seguro">No estoy seguro</span>
+              <div class="wiz-section-ttl">Servicio</div>
+              <div class="wiz-choices" id="chService">
+                <button type="button" class="wiz-choice is-active" data-val="Evaluación ortodóntica" data-dur="30" data-price="0">
+                  <span class="badge">Gratis</span>
+                  <span class="ttl">Evaluación ortodóntica</span>
+                  <span class="meta">30 min · sin costo</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Brackets metálicos" data-dur="45" data-price="0">
+                  <span class="badge">Sin abono</span>
+                  <span class="ttl">Brackets metálicos</span>
+                  <span class="meta">45 min · consulta</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Brackets cerámicos" data-dur="45" data-price="0">
+                  <span class="ttl">Brackets cerámicos</span>
+                  <span class="meta">45 min · consulta</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Auto-ligado" data-dur="45" data-price="0">
+                  <span class="ttl">Brackets auto-ligado</span>
+                  <span class="meta">45 min · consulta</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Ortodoncia invisible" data-dur="45" data-price="0">
+                  <span class="ttl">Ortodoncia invisible</span>
+                  <span class="meta">45 min · consulta</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Limpieza dental" data-dur="45" data-price="45">
+                  <span class="ttl">Limpieza dental</span>
+                  <span class="meta">45 min · desde $45</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Blanqueamiento" data-dur="60" data-price="120">
+                  <span class="ttl">Blanqueamiento</span>
+                  <span class="meta">60 min · desde $120</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Radiografía panorámica" data-dur="20" data-price="35">
+                  <span class="ttl">Radiografía panorámica</span>
+                  <span class="meta">20 min · desde $35</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Tratamiento láser" data-dur="40" data-price="80">
+                  <span class="ttl">Tratamiento láser</span>
+                  <span class="meta">40 min · desde $80</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Endodoncia" data-dur="75" data-price="150">
+                  <span class="ttl">Endodoncia</span>
+                  <span class="meta">75 min · desde $150</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Cirugía 3ras molares" data-dur="60" data-price="200">
+                  <span class="ttl">Cirugía 3ras molares</span>
+                  <span class="meta">60 min · desde $200</span>
+                </button>
+                <button type="button" class="wiz-choice" data-val="Restauración estética" data-dur="60" data-price="95">
+                  <span class="ttl">Restauración estética</span>
+                  <span class="meta">60 min · desde $95</span>
+                </button>
               </div>
-              <input type="hidden" name="service" id="serviceVal" value="Brackets / ortodoncia" />
-            </div>
+            </section>
 
-            <div class="book-row">
+            <!-- ========== STEP 2 ========== -->
+            <section class="wiz-step" data-step="2">
+              <span class="eyebrow"><span class="num">2</span> Día y hora</span>
+              <h2>Elige cuándo quieres venir</h2>
+              <p class="sub">Mostramos disponibilidad en tiempo real. Verde = libre, gris = ocupado.</p>
+
+              <div class="wiz-cal" id="wizCal">
+                <div class="wiz-cal-head">
+                  <h4 id="calMonth">—</h4>
+                  <div class="wiz-cal-nav">
+                    <button type="button" id="calPrev" aria-label="Mes anterior">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button type="button" id="calNext" aria-label="Mes siguiente">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="wiz-cal-grid" id="calGrid"></div>
+              </div>
+
+              <div class="wiz-section-ttl">Horario disponible</div>
+              <div class="wiz-slots" id="wizSlots">
+                <div class="wiz-slot-empty">Elige un día para ver las horas disponibles.</div>
+              </div>
+            </section>
+
+            <!-- ========== STEP 3 ========== -->
+            <section class="wiz-step" data-step="3">
+              <span class="eyebrow"><span class="num">3</span> Tus datos</span>
+              <h2>¿A nombre de quién va la cita?</h2>
+              <p class="sub">Necesitamos lo básico para confirmar y enviarte el recordatorio.</p>
+
+              <div class="wiz-grid-2">
+                <div class="oc-field">
+                  <label>Nombre y apellido</label>
+                  <input class="oc-input" type="text" id="fldName" required placeholder="Ej. Ana Castillo" autocomplete="name" />
+                </div>
+                <div class="oc-field">
+                  <label>Cédula o pasaporte</label>
+                  <input class="oc-input" type="text" id="fldId" placeholder="8-XXX-XXXX" />
+                </div>
+              </div>
+              <div class="wiz-grid-2">
+                <div class="oc-field">
+                  <label>WhatsApp</label>
+                  <input class="oc-input" type="tel" id="fldPhone" required placeholder="6XXX-XXXX" autocomplete="tel" />
+                </div>
+                <div class="oc-field">
+                  <label>Correo electrónico</label>
+                  <input class="oc-input" type="email" id="fldEmail" required placeholder="tu@correo.com" autocomplete="email" />
+                </div>
+              </div>
               <div class="oc-field">
-                <label>Nombre y apellido</label>
-                <input class="oc-input" type="text" name="name" required placeholder="Tu nombre" />
+                <label>¿Es para ti o para otra persona? (opcional)</label>
+                <div class="wiz-choices" id="chFor">
+                  <button type="button" class="wiz-choice is-active" data-val="Para mí">Para mí</button>
+                  <button type="button" class="wiz-choice" data-val="Para mi hijo/a">Para mi hijo/a</button>
+                  <button type="button" class="wiz-choice" data-val="Para familiar">Familiar</button>
+                  <button type="button" class="wiz-choice" data-val="Otra persona">Otra persona</button>
+                </div>
               </div>
               <div class="oc-field">
-                <label>WhatsApp</label>
-                <input class="oc-input" type="tel" name="phone" required placeholder="6XXX-XXXX" />
+                <label>¿Algo que el doctor deba saber? (opcional)</label>
+                <textarea class="oc-textarea" id="fldNotes" placeholder="Ej. Ya usé brackets, tengo sensibilidad, alergias, etc."></textarea>
               </div>
-            </div>
+            </section>
 
-            <div class="oc-field">
-              <label>Correo electrónico (opcional)</label>
-              <input class="oc-input" type="email" name="email" placeholder="tu@correo.com" />
-            </div>
+            <!-- ========== STEP 4 ========== -->
+            <section class="wiz-step" data-step="4">
+              <span class="eyebrow"><span class="num">4</span> Confirma tu reserva</span>
+              <h2>Revisa los detalles y confirma</h2>
+              <p class="sub">La evaluación inicial es <strong>sin costo</strong>. Para otros servicios puedes reservar con un abono o pagar en clínica.</p>
 
-            <div class="oc-field">
-              <label>Día que te queda mejor</label>
-              <div class="book-pills" id="pillsDay">
-                <span class="book-pill is-active" data-val="Lo antes posible">Lo antes posible</span>
-                <span class="book-pill" data-val="Esta semana">Esta semana</span>
-                <span class="book-pill" data-val="Próxima semana">Próxima semana</span>
-                <span class="book-pill" data-val="Fin de semana">Fin de semana</span>
+              <div class="wiz-summary" id="wizSummary">
+                <div class="wiz-summary-row"><span class="k">Servicio</span><span class="v" id="sumService">—</span></div>
+                <div class="wiz-summary-row"><span class="k">Sucursal</span><span class="v" id="sumBranch">—</span></div>
+                <div class="wiz-summary-row"><span class="k">Fecha y hora</span><span class="v" id="sumWhen">—</span></div>
+                <div class="wiz-summary-row"><span class="k">Paciente</span><span class="v" id="sumPatient">—</span></div>
+                <div class="wiz-summary-row total"><span class="k">Total estimado</span><span class="v" id="sumTotal">USD 0.00</span></div>
               </div>
-              <input type="hidden" name="day" id="dayVal" value="Lo antes posible" />
+
+              <div class="wiz-section-ttl">Método de pago</div>
+              <div class="wiz-pay-list" id="payList">
+                <div class="wiz-pay is-active" data-val="clinic">
+                  <div class="icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="m9 12 2 2 4-4"/></svg>
+                  </div>
+                  <div class="body">
+                    <h5>Pagar en clínica</h5>
+                    <p>Solo confirma tu cita ahora. Pagas el día de tu visita.</p>
+                  </div>
+                  <div class="price">USD 0<small>al reservar</small></div>
+                </div>
+                <div class="wiz-pay" data-val="deposit">
+                  <div class="icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+                  </div>
+                  <div class="body">
+                    <h5>Abono USD 15 — Asegurar cita</h5>
+                    <p>Confirma con un abono reembolsable. Se descuenta del total.</p>
+                  </div>
+                  <div class="price">USD 15<small>se descuenta</small></div>
+                </div>
+                <div class="wiz-pay" data-val="full" id="payFull" hidden>
+                  <div class="icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H4v12h16v-4"/><path d="M22 12h-6a2 2 0 0 0 0 4h6v-4z"/></svg>
+                  </div>
+                  <div class="body">
+                    <h5>Pagar total ahora</h5>
+                    <p>Llega y ya está todo cubierto. Recibo digital al instante.</p>
+                  </div>
+                  <div class="price" id="payFullPrice">USD 0<small>total</small></div>
+                </div>
+              </div>
+
+              <div class="wiz-card-mock" id="payCardMock" hidden>
+                <div class="label">Datos de tarjeta <span class="mock-pill">Modo demo</span></div>
+                <div class="wiz-card-row">
+                  <input type="text" id="ccNumber" placeholder="4242 4242 4242 4242" autocomplete="cc-number" maxlength="19" />
+                </div>
+                <div class="wiz-card-row two" style="margin-top:10px;">
+                  <input type="text" id="ccExp" placeholder="MM / AA" maxlength="7" />
+                  <input type="text" id="ccCvc" placeholder="CVC" maxlength="4" />
+                </div>
+                <p style="margin: 12px 0 0; font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em;">
+                  Esta es una demostración — no se cobra ni se almacena información real.
+                </p>
+              </div>
+
+              <label style="display:flex; align-items:flex-start; gap:10px; margin-top:18px; font-size:12.5px; color: var(--oc-ink-mute); line-height:1.5; cursor:pointer;">
+                <input type="checkbox" id="fldTos" checked style="margin-top:2px;" />
+                <span>Acepto la política de cancelación: gratis hasta 4h antes. Después se aplica un cargo del 50% del abono.</span>
+              </label>
+            </section>
+          </div>
+
+          <div class="wiz-foot">
+            <span class="step-text" id="stepText">Paso 1 de 4</span>
+            <div class="actions">
+              <button type="button" class="oc-btn oc-btn-outline" id="btnBack" style="display:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                Atrás
+              </button>
+              <button type="button" class="oc-btn oc-btn-teal" id="btnNext">
+                Continuar
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </button>
+              <button type="button" class="oc-btn oc-btn-teal" id="btnPay" style="display:none;">
+                <span id="btnPayLabel">Confirmar reserva</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
             </div>
-
-            <div class="oc-field">
-              <label>¿Algo que quieras contarnos?</label>
-              <textarea class="oc-textarea" name="notes" placeholder="Ej. Ya usé brackets, tengo dolor, mi hijo necesita evaluación, etc."></textarea>
-            </div>
-
-            <button type="submit" class="oc-btn oc-btn-teal oc-btn-lg" style="width: 100%; margin-top: 8px;">
-              Enviar y agendar por WhatsApp
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 14.2c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.4 0-.5l-.9-2.1c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
-            </button>
-
-            <p class="book-fine">Al enviar abrimos un chat de WhatsApp con tu sucursal — nunca compartimos tus datos.</p>
-          </form>
+          </div>
         </div>
 
-        <div class="book-card book-success" id="bookSuccess">
-          <div class="book-success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <!-- ========== SUCCESS ========== -->
+        <div class="book-card wiz-done" id="bookSuccess">
+          <div class="wiz-done-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
           </div>
-          <h3>¡Recibimos tu solicitud!</h3>
-          <p>Abrimos WhatsApp en otra pestaña con los datos de tu cita. Si no se abrió, da clic aquí abajo.</p>
-          <a class="oc-btn oc-btn-teal" id="bookWa" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+          <h3>¡Tu cita está <em>confirmada</em>!</h3>
+          <p class="lede">Te enviamos los detalles a tu WhatsApp y correo. El día previo te recordaremos con un mensaje automático.</p>
+
+          <div class="wiz-done-code">
+            <span class="lbl">Código de confirmación</span>
+            <span class="code" id="doneCode">—</span>
+          </div>
+
+          <div class="wiz-done-details">
+            <div class="wiz-summary">
+              <div class="wiz-summary-row"><span class="k">Servicio</span><span class="v" id="doneService">—</span></div>
+              <div class="wiz-summary-row"><span class="k">Sucursal</span><span class="v" id="doneBranch">—</span></div>
+              <div class="wiz-summary-row"><span class="k">Cuándo</span><span class="v" id="doneWhen">—</span></div>
+              <div class="wiz-summary-row"><span class="k">Pago</span><span class="v" id="donePayment">—</span></div>
+            </div>
+          </div>
+
+          <div class="wiz-done-actions">
+            <a class="oc-btn oc-btn-teal" href="/">Volver al inicio</a>
+            <button type="button" class="oc-btn oc-btn-outline" id="btnAnother">Agendar otra cita</button>
+          </div>
         </div>
       </div>
     </div>
@@ -313,65 +907,366 @@
   <script src="/shared/nav-footer.js?v=1"></script>
   <script>
     (function() {
-      const WA = {
-        andes:      '50766734766',
-        coronado:   '50763400028',
-        costaverde: '50767296810'
-      };
       const BRANCH_LABEL = {
         andes:      'Los Andes Mall',
-        coronado:   'Coronado',
+        coronado:   'The Village Coronado',
         costaverde: 'Costa Verde'
       };
+      const MONTH_NAMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const DOW = ['L','M','M','J','V','S','D'];
 
-      function pillGroup(containerId, inputId) {
+      const state = {
+        step: 1,
+        branch: 'andes',
+        service: 'Evaluación ortodóntica',
+        servicePrice: 0,
+        serviceDur: 30,
+        date: null,
+        time: null,
+        payment: 'clinic',
+        cal: { y: new Date().getFullYear(), m: new Date().getMonth() }
+      };
+
+      // ----- choice groups -----
+      function bindChoice(containerId, onPick) {
         const c = document.getElementById(containerId);
-        const input = document.getElementById(inputId);
         if (!c) return;
         c.addEventListener('click', e => {
-          const p = e.target.closest('.book-pill');
-          if (!p) return;
-          c.querySelectorAll('.book-pill').forEach(x => x.classList.remove('is-active'));
-          p.classList.add('is-active');
-          input.value = p.dataset.val;
+          const b = e.target.closest('.wiz-choice');
+          if (!b) return;
+          c.querySelectorAll('.wiz-choice').forEach(x => x.classList.remove('is-active'));
+          b.classList.add('is-active');
+          onPick(b);
         });
       }
-      pillGroup('pillsBranch', 'branchVal');
-      pillGroup('pillsService', 'serviceVal');
-      pillGroup('pillsDay', 'dayVal');
-
-      const form = document.getElementById('bookForm');
-      const card = document.getElementById('bookCard');
-      const ok = document.getElementById('bookSuccess');
-      const waBtn = document.getElementById('bookWa');
-
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        const branchKey = data.branch || 'andes';
-        const num = WA[branchKey];
-        const label = BRANCH_LABEL[branchKey];
-        const lines = [
-          `Hola OrthoClinic ${label}, quiero agendar mi evaluación.`,
-          ``,
-          `• Nombre: ${data.name || '(sin dato)'}`,
-          `• WhatsApp: ${data.phone || '(sin dato)'}`,
-          data.email ? `• Email: ${data.email}` : null,
-          `• Interés: ${data.service || ''}`,
-          `• Cuándo: ${data.day || ''}`,
-          data.notes ? `• Notas: ${data.notes}` : null,
-          ``,
-          `¡Gracias!`
-        ].filter(Boolean);
-        const msg = encodeURIComponent(lines.join('\n'));
-        const url = `https://wa.me/${num}?text=${msg}`;
-        waBtn.href = url;
-        window.open(url, '_blank', 'noopener');
-
-        card.style.display = 'none';
-        ok.classList.add('is-on');
-        window.scrollTo({ top: ok.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+      bindChoice('chBranch', b => { state.branch = b.dataset.val; });
+      bindChoice('chService', b => {
+        state.service = b.dataset.val;
+        state.servicePrice = parseFloat(b.dataset.price || '0');
+        state.serviceDur = parseInt(b.dataset.dur || '30', 10);
       });
+      bindChoice('chFor', () => {});
+
+      // ----- payment options -----
+      const payList = document.getElementById('payList');
+      const payCardMock = document.getElementById('payCardMock');
+      const payFull = document.getElementById('payFull');
+      const payFullPrice = document.getElementById('payFullPrice');
+      const btnPayLabel = document.getElementById('btnPayLabel');
+
+      payList.addEventListener('click', e => {
+        const p = e.target.closest('.wiz-pay');
+        if (!p) return;
+        payList.querySelectorAll('.wiz-pay').forEach(x => x.classList.remove('is-active'));
+        p.classList.add('is-active');
+        state.payment = p.dataset.val;
+        updatePayUI();
+      });
+
+      function updatePayUI() {
+        if (state.payment === 'clinic') {
+          payCardMock.hidden = true;
+          btnPayLabel.textContent = 'Confirmar reserva';
+        } else if (state.payment === 'deposit') {
+          payCardMock.hidden = false;
+          btnPayLabel.textContent = 'Pagar abono USD 15 y confirmar';
+        } else {
+          payCardMock.hidden = false;
+          btnPayLabel.textContent = `Pagar USD ${state.servicePrice.toFixed(2)} y confirmar`;
+        }
+      }
+
+      // ----- calendar -----
+      const calGrid = document.getElementById('calGrid');
+      const calMonth = document.getElementById('calMonth');
+      const calPrev = document.getElementById('calPrev');
+      const calNext = document.getElementById('calNext');
+
+      function isSameDay(a, b) {
+        return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+      }
+      function buildCalendar() {
+        const today = new Date(); today.setHours(0,0,0,0);
+        const limit = new Date(today); limit.setDate(today.getDate() + 60);
+        const y = state.cal.y, m = state.cal.m;
+        calMonth.textContent = `${MONTH_NAMES[m]} ${y}`;
+
+        // disable prev if at current month
+        calPrev.disabled = (y === today.getFullYear() && m === today.getMonth());
+        // disable next if at month of limit
+        calNext.disabled = (y === limit.getFullYear() && m === limit.getMonth());
+
+        calGrid.innerHTML = '';
+        DOW.forEach(d => {
+          const el = document.createElement('div');
+          el.className = 'wiz-cal-dow';
+          el.textContent = d;
+          calGrid.appendChild(el);
+        });
+
+        const first = new Date(y, m, 1);
+        // Monday = 0 (Spanish week)
+        let startDow = first.getDay() - 1;
+        if (startDow < 0) startDow = 6;
+        for (let i = 0; i < startDow; i++) {
+          const e = document.createElement('div');
+          e.className = 'wiz-cal-day is-empty';
+          calGrid.appendChild(e);
+        }
+        const daysInMonth = new Date(y, m + 1, 0).getDate();
+        for (let d = 1; d <= daysInMonth; d++) {
+          const date = new Date(y, m, d);
+          const cell = document.createElement('div');
+          cell.className = 'wiz-cal-day';
+          cell.textContent = d;
+          const tooEarly = date < today;
+          const tooLate = date > limit;
+          const isSun = date.getDay() === 0;
+          if (tooEarly || tooLate || isSun) {
+            cell.classList.add('is-disabled');
+          } else {
+            cell.addEventListener('click', () => {
+              calGrid.querySelectorAll('.wiz-cal-day').forEach(x => x.classList.remove('is-selected'));
+              cell.classList.add('is-selected');
+              state.date = date;
+              renderSlots();
+            });
+          }
+          if (isSameDay(date, today)) cell.classList.add('is-today');
+          if (isSameDay(date, state.date)) cell.classList.add('is-selected');
+          calGrid.appendChild(cell);
+        }
+      }
+      calPrev.addEventListener('click', () => {
+        if (calPrev.disabled) return;
+        state.cal.m -= 1;
+        if (state.cal.m < 0) { state.cal.m = 11; state.cal.y -= 1; }
+        buildCalendar();
+      });
+      calNext.addEventListener('click', () => {
+        if (calNext.disabled) return;
+        state.cal.m += 1;
+        if (state.cal.m > 11) { state.cal.m = 0; state.cal.y += 1; }
+        buildCalendar();
+      });
+
+      // ----- time slots -----
+      const slotsEl = document.getElementById('wizSlots');
+      function renderSlots() {
+        if (!state.date) {
+          slotsEl.innerHTML = '<div class="wiz-slot-empty">Elige un día para ver las horas disponibles.</div>';
+          return;
+        }
+        // Saturday: shorter hours
+        const isSat = state.date.getDay() === 6;
+        const slots = [];
+        const startH = 9;
+        const endH = isSat ? 14 : 19;
+        for (let h = startH; h < endH; h++) {
+          slots.push({ h, m: 0 });
+          slots.push({ h, m: 30 });
+        }
+        // deterministic "booked" pattern based on date
+        const seed = state.date.getDate() + state.date.getMonth() * 31;
+        const bookedIdx = new Set();
+        for (let i = 0; i < 5; i++) {
+          bookedIdx.add(Math.abs((seed * (i + 3) * 7) % slots.length));
+        }
+        slotsEl.innerHTML = '';
+        slots.forEach((s, i) => {
+          const el = document.createElement('div');
+          el.className = 'wiz-slot';
+          const hh = String(s.h).padStart(2, '0');
+          const mm = String(s.m).padStart(2, '0');
+          const label = `${hh}:${mm}`;
+          el.textContent = label;
+          if (bookedIdx.has(i)) {
+            el.classList.add('is-disabled');
+          } else {
+            el.addEventListener('click', () => {
+              slotsEl.querySelectorAll('.wiz-slot').forEach(x => x.classList.remove('is-selected'));
+              el.classList.add('is-selected');
+              state.time = label;
+            });
+          }
+          if (state.time === label) el.classList.add('is-selected');
+          slotsEl.appendChild(el);
+        });
+      }
+
+      // ----- wizard navigation -----
+      const dots = document.querySelectorAll('.wiz-step-dot');
+      const steps = document.querySelectorAll('.wiz-step');
+      const btnBack = document.getElementById('btnBack');
+      const btnNext = document.getElementById('btnNext');
+      const btnPay = document.getElementById('btnPay');
+      const stepText = document.getElementById('stepText');
+
+      function goTo(n) {
+        state.step = n;
+        steps.forEach(s => s.classList.toggle('is-active', parseInt(s.dataset.step,10) === n));
+        dots.forEach(d => {
+          const sn = parseInt(d.dataset.step, 10);
+          d.classList.toggle('is-active', sn === n);
+          d.classList.toggle('is-done', sn < n);
+        });
+        btnBack.style.display = n > 1 ? '' : 'none';
+        btnNext.style.display = n < 4 ? '' : 'none';
+        btnPay.style.display  = n === 4 ? '' : 'none';
+        stepText.textContent = `Paso ${n} de 4`;
+        if (n === 4) renderSummary();
+        if (n === 2 && !state.date) buildCalendar();
+        window.scrollTo({ top: document.getElementById('bookCard').offsetTop - 80, behavior: 'smooth' });
+      }
+
+      function validateStep(n) {
+        if (n === 1) {
+          return state.branch && state.service;
+        }
+        if (n === 2) {
+          if (!state.date || !state.time) { alert('Selecciona una fecha y una hora disponible.'); return false; }
+          return true;
+        }
+        if (n === 3) {
+          const name = document.getElementById('fldName').value.trim();
+          const phone = document.getElementById('fldPhone').value.trim();
+          const email = document.getElementById('fldEmail').value.trim();
+          if (!name || !phone || !email) { alert('Completa nombre, WhatsApp y correo.'); return false; }
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Correo no válido.'); return false; }
+          return true;
+        }
+        return true;
+      }
+
+      btnNext.addEventListener('click', () => {
+        if (!validateStep(state.step)) return;
+        goTo(Math.min(4, state.step + 1));
+      });
+      btnBack.addEventListener('click', () => goTo(Math.max(1, state.step - 1)));
+
+      // ----- summary -----
+      function fmtDate(d) {
+        if (!d) return '—';
+        const dia = d.getDate();
+        const mes = MONTH_NAMES[d.getMonth()];
+        const dn = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'][d.getDay()];
+        return `${dn} ${dia} de ${mes}`;
+      }
+      function renderSummary() {
+        document.getElementById('sumService').textContent = `${state.service} · ${state.serviceDur} min`;
+        document.getElementById('sumBranch').textContent = BRANCH_LABEL[state.branch];
+        document.getElementById('sumWhen').textContent = `${fmtDate(state.date)} · ${state.time || '—'}`;
+        document.getElementById('sumPatient').textContent = document.getElementById('fldName').value.trim() || '—';
+        const tot = state.servicePrice;
+        document.getElementById('sumTotal').textContent = tot > 0 ? `USD ${tot.toFixed(2)}` : 'Sin costo · evaluación';
+        // show "pay full" only if there is a price
+        if (tot > 0) {
+          payFull.hidden = false;
+          payFullPrice.innerHTML = `USD ${tot.toFixed(2)}<small>total</small>`;
+        } else {
+          payFull.hidden = true;
+          if (state.payment === 'full') {
+            state.payment = 'clinic';
+            payList.querySelectorAll('.wiz-pay').forEach(x => x.classList.remove('is-active'));
+            payList.querySelector('[data-val="clinic"]').classList.add('is-active');
+          }
+        }
+        updatePayUI();
+      }
+
+      // ----- card input formatting (mock) -----
+      const ccNumber = document.getElementById('ccNumber');
+      const ccExp = document.getElementById('ccExp');
+      ccNumber.addEventListener('input', () => {
+        let v = ccNumber.value.replace(/\D/g, '').slice(0, 16);
+        ccNumber.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+      ccExp.addEventListener('input', () => {
+        let v = ccExp.value.replace(/\D/g, '').slice(0, 4);
+        if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+        ccExp.value = v;
+      });
+
+      // ----- confirm -----
+      function genCode() {
+        const a = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let s = 'OC-';
+        for (let i = 0; i < 6; i++) s += a[Math.floor(Math.random()*a.length)];
+        return s;
+      }
+
+      btnPay.addEventListener('click', () => {
+        if (!document.getElementById('fldTos').checked) {
+          alert('Acepta la política de cancelación para continuar.');
+          return;
+        }
+        if (state.payment !== 'clinic') {
+          const num = ccNumber.value.replace(/\s/g, '');
+          const exp = ccExp.value.replace(/\s/g, '');
+          const cvc = document.getElementById('ccCvc').value.trim();
+          if (num.length < 13 || !exp.includes('/') || cvc.length < 3) {
+            alert('Completa los datos de la tarjeta (modo demo).');
+            return;
+          }
+        }
+
+        // mock "processing"
+        btnPay.disabled = true;
+        const original = btnPayLabel.textContent;
+        btnPayLabel.textContent = 'Procesando…';
+
+        setTimeout(() => {
+          const code = genCode();
+          document.getElementById('doneCode').textContent = code;
+          document.getElementById('doneService').textContent = state.service;
+          document.getElementById('doneBranch').textContent = BRANCH_LABEL[state.branch];
+          document.getElementById('doneWhen').textContent = `${fmtDate(state.date)} · ${state.time}`;
+          let payTxt;
+          if (state.payment === 'clinic')      payTxt = 'Se paga en clínica';
+          else if (state.payment === 'deposit') payTxt = 'Abono USD 15.00 cobrado (demo)';
+          else                                   payTxt = `USD ${state.servicePrice.toFixed(2)} cobrado (demo)`;
+          document.getElementById('donePayment').textContent = payTxt;
+
+          // store
+          try {
+            const data = {
+              code, service: state.service, branch: state.branch,
+              date: state.date.toISOString(), time: state.time,
+              payment: state.payment, ts: Date.now()
+            };
+            const list = JSON.parse(localStorage.getItem('oc_bookings') || '[]');
+            list.push(data);
+            localStorage.setItem('oc_bookings', JSON.stringify(list));
+          } catch(e) {}
+
+          document.getElementById('bookCard').style.display = 'none';
+          document.getElementById('bookSuccess').classList.add('is-on');
+          window.scrollTo({ top: document.getElementById('bookSuccess').offsetTop - 80, behavior: 'smooth' });
+
+          btnPay.disabled = false;
+          btnPayLabel.textContent = original;
+        }, 1100);
+      });
+
+      document.getElementById('btnAnother').addEventListener('click', () => {
+        location.reload();
+      });
+
+      // ----- prefill from URL ?sucursal= -----
+      try {
+        const params = new URLSearchParams(location.search);
+        const s = params.get('sucursal');
+        if (s && BRANCH_LABEL[s]) {
+          state.branch = s;
+          document.querySelectorAll('#chBranch .wiz-choice').forEach(b => {
+            b.classList.toggle('is-active', b.dataset.val === s);
+          });
+        }
+      } catch(e) {}
+
+      // init
+      buildCalendar();
+      updatePayUI();
     })();
   </script>
 </body>

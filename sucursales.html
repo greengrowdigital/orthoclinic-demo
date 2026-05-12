@@ -77,43 +77,83 @@
     .branch-row span.mono { font-family: var(--oc-font-mono); font-weight: 600; color: var(--oc-teal-deep); }
     .branch-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
 
-    .branch-map-wrap {
+    .branch-gallery {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: 1.2fr 1fr;
+      gap: 14px;
+      aspect-ratio: 4/4.4;
+    }
+    .branch-frame {
       position: relative;
-      aspect-ratio: 4/5;
       border-radius: var(--oc-radius-lg);
       overflow: hidden;
-      box-shadow: var(--oc-shadow-lg);
+      box-shadow: var(--oc-shadow-md);
+      background: var(--oc-bg-soft);
     }
-    .branch-map-wrap iframe {
+    .branch-frame iframe {
       width: 100%;
       height: 100%;
       border: 0;
       display: block;
+    }
+    .branch-frame-main {
+      grid-row: span 2;
+    }
+    .branch-frame-map iframe {
       filter: grayscale(0.25) contrast(0.95);
     }
-    .branch-map-card {
+    .branch-frame-label {
       position: absolute;
-      bottom: 24px;
-      left: 24px;
-      right: 24px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(14px);
-      padding: 20px 24px;
-      border-radius: var(--oc-radius-md);
-      box-shadow: var(--oc-shadow-md);
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      top: 14px;
+      left: 14px;
+      padding: 6px 12px;
+      background: rgba(10,26,31,0.78);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: var(--oc-radius-pill);
+      z-index: 2;
       pointer-events: none;
     }
-    .branch-map-card svg { color: var(--oc-teal); flex-shrink: 0; }
-    .branch-map-card h4 { font-family: var(--oc-font-display); font-size: 20px; font-weight: 400; letter-spacing: -0.01em; margin: 0; }
-    .branch-map-card p { margin: 4px 0 0; color: var(--oc-ink-mute); font-size: 13px; }
+    .branch-frame-photo {
+      background: linear-gradient(160deg, var(--oc-teal-soft) 0%, var(--oc-bg-warm) 60%, var(--oc-coral-tint) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--oc-teal-deep);
+      position: relative;
+    }
+    .branch-frame-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5) 0%, transparent 50%);
+    }
+    .branch-frame-photo svg { width: 55%; opacity: 0.55; position: relative; z-index: 1; }
+    .branch-frame-photo .pill-num {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      font-family: var(--oc-font-display);
+      font-style: italic;
+      font-size: 26px;
+      color: rgba(10,26,31,0.55);
+      z-index: 1;
+    }
 
     @media (max-width: 980px) {
       .branch-inner, .branch-block:nth-child(even) .branch-inner { grid-template-columns: 1fr; gap: 40px; }
       .branch-block:nth-child(even) .branch-inner > div:first-child { order: 0; }
-      .branch-map-wrap { aspect-ratio: 1; max-width: 520px; margin: 0 auto; width: 100%; }
+      .branch-gallery { max-width: 520px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .branch-gallery { grid-template-columns: 1fr; grid-template-rows: 1.4fr .8fr .8fr; aspect-ratio: auto; }
+      .branch-frame-main { grid-row: auto; height: 280px; }
+      .branch-frame-map, .branch-frame-photo { height: 180px; }
     }
   </style>
 </head>
@@ -154,14 +194,24 @@
           <a class="oc-btn oc-btn-outline" href="https://www.google.com/maps/place/OrthoClinic+Panam%C3%A1/@9.0522233,-79.5108441,17z" target="_blank" rel="noopener">Cómo llegar</a>
         </div>
       </div>
-      <div class="branch-map-wrap" data-reveal>
-        <iframe src="https://www.google.com/maps?q=OrthoClinic+Los+Andes+Mall+Panama&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Los Andes Mall"></iframe>
-        <div class="branch-map-card">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <h4>Los Andes Mall</h4>
-            <p>Primer Nivel, Local 135-A</p>
-          </div>
+      <div class="branch-gallery" data-reveal>
+        <div class="branch-frame branch-frame-main">
+          <span class="branch-frame-label">Street View · Google</span>
+          <iframe src="https://www.google.com/maps?layer=c&cbll=9.0522233,-79.5082692&cbp=12,0,0,0,0&output=svembed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Foto Los Andes Mall"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-map">
+          <span class="branch-frame-label">Mapa</span>
+          <iframe src="https://www.google.com/maps?q=9.0522233,-79.5082692&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Los Andes Mall"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-photo">
+          <span class="branch-frame-label">Sucursal</span>
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 80V40l30-20 30 20v40"/>
+            <path d="M35 80V58h30v22"/>
+            <path d="M20 80h60"/>
+            <circle cx="50" cy="30" r="3" fill="currentColor"/>
+          </svg>
+          <span class="pill-num">01</span>
         </div>
       </div>
     </div>
@@ -196,14 +246,24 @@
           <a class="oc-btn oc-btn-outline" href="https://maps.app.goo.gl/ZnA58jYfvvtZ6tFA7" target="_blank" rel="noopener">Cómo llegar</a>
         </div>
       </div>
-      <div class="branch-map-wrap" data-reveal>
-        <iframe src="https://www.google.com/maps?q=The+Village+Coronado+OrthoClinic&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Coronado"></iframe>
-        <div class="branch-map-card">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <h4>The Village Coronado</h4>
-            <p>Segunda Planta, Local 15</p>
-          </div>
+      <div class="branch-gallery" data-reveal>
+        <div class="branch-frame branch-frame-main">
+          <span class="branch-frame-label">Street View · Google</span>
+          <iframe src="https://www.google.com/maps?layer=c&cbll=8.5278,-79.9523&cbp=12,0,0,0,0&output=svembed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Foto Coronado"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-map">
+          <span class="branch-frame-label">Mapa</span>
+          <iframe src="https://www.google.com/maps?q=The+Village+Coronado+Panama&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Coronado"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-photo">
+          <span class="branch-frame-label">Sucursal</span>
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 80V35l35-15 35 15v45"/>
+            <path d="M30 80V50h40v30"/>
+            <path d="M40 65v15M60 65v15"/>
+            <path d="M15 80h70"/>
+          </svg>
+          <span class="pill-num">02</span>
         </div>
       </div>
     </div>
@@ -238,14 +298,25 @@
           <a class="oc-btn oc-btn-outline" href="https://www.google.com/maps?q=costa+verde+orthoclinic" target="_blank" rel="noopener">Cómo llegar</a>
         </div>
       </div>
-      <div class="branch-map-wrap" data-reveal>
-        <iframe src="https://www.google.com/maps?q=Costa+Verde+Arraijan+Panama&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Costa Verde"></iframe>
-        <div class="branch-map-card">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <h4>Costa Verde</h4>
-            <p>Arraiján, Panamá Oeste</p>
-          </div>
+      <div class="branch-gallery" data-reveal>
+        <div class="branch-frame branch-frame-main">
+          <span class="branch-frame-label">Street View · Google</span>
+          <iframe src="https://www.google.com/maps?layer=c&cbll=8.9525,-79.6620&cbp=12,0,0,0,0&output=svembed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Foto Costa Verde"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-map">
+          <span class="branch-frame-label">Mapa</span>
+          <iframe src="https://www.google.com/maps?q=Costa+Verde+Arraijan+Panama&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Costa Verde"></iframe>
+        </div>
+        <div class="branch-frame branch-frame-photo">
+          <span class="branch-frame-label">Sucursal</span>
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 80V45h60v35"/>
+            <path d="M10 50l40-25 40 25"/>
+            <path d="M40 80V62h20v18"/>
+            <path d="M30 55v8M70 55v8"/>
+            <path d="M10 80h80"/>
+          </svg>
+          <span class="pill-num">03</span>
         </div>
       </div>
     </div>
