@@ -2,8 +2,7 @@
 (function () {
   const WA = {
     andes:    { num: '50766734766',  label: 'Los Andes Mall · 6673-4766' },
-    coronado: { num: '50763400028',  label: 'Coronado · 6340-0028' },
-    costa:    { num: '50767296810',  label: 'Costa Verde · 6729-6810' }
+    coronado: { num: '50763400028',  label: 'Coronado · 6340-0028' }
   };
   const WA_DEFAULT = WA.andes;
 
@@ -114,7 +113,6 @@
               <ul>
                 <li><a href="/sucursales#andes">Los Andes Mall<br><span style="color:rgba(255,255,255,0.45);font-size:12px;">6673-4766</span></a></li>
                 <li><a href="/sucursales#coronado">Coronado<br><span style="color:rgba(255,255,255,0.45);font-size:12px;">6340-0028</span></a></li>
-                <li><a href="/sucursales#costaverde">Costa Verde<br><span style="color:rgba(255,255,255,0.45);font-size:12px;">6729-6810</span></a></li>
               </ul>
             </div>
           </div>
